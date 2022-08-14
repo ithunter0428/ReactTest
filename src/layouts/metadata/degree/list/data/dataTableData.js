@@ -28,7 +28,7 @@ import MDButton from "components/MDButton";
 
 const dataTableData = {
   columns: [
-    { Header: "专业ID", accessor: "degree_id", Cell: ({ value }) => <IdCell id={value} /> },
+    { Header: "学位ID", accessor: "degree_id", Cell: ({ value }) => <IdCell id={value} /> },
     {
       Header: "中文名称",
       accessor: "name",
