@@ -18,9 +18,8 @@ Coded by www.creative-tim.com
 
 import { Link } from "react-router-dom";
 
-import IdCell from "layouts/metadata/degree/list/components/IdCell";
-import DefaultCell from "layouts/metadata/degree/list/components/DefaultCell";
-import StatusCell from "layouts/metadata/degree/list/components/StatusCell";
+import IdCell from "layouts/metadata/school/list/components/IdCell";
+import DefaultCell from "layouts/metadata/school/list/components/DefaultCell";
 
 import Grid from "@mui/material/Grid";
 
@@ -29,65 +28,15 @@ import MDButton from "components/MDButton";
 
 const dataTableData = {
   columns: [
-    { Header: "用户ID", accessor: "id", Cell: ({ value }) => <IdCell id={value} /> },
+    { Header: "专业ID", accessor: "degree_id", Cell: ({ value }) => <IdCell id={value} /> },
     {
-      Header: "手机号",
-      accessor: "phone",
-      Cell: ({ value }) => <DefaultCell value={value} />,
-    },
-    {
-      Header: "姓名",
+      Header: "中文名称",
       accessor: "name",
       Cell: ({ value }) => <DefaultCell value={value} />,
     },
     {
-      Header: "学生卡验证状态",
-      accessor: "verified_status",
-      Cell: ({ value }) => {
-        let status;
-
-        if (value === "verified") {
-          status = <StatusCell icon="done" color="success" status="Verified" />;
-        } else {
-          status = <StatusCell icon="close" color="error" status="Unverified" />;
-        }
-
-        return status;
-      },
-    },
-    {
-      Header: "是否完善信息",
-      accessor: "filled",
-      Cell: ({ value }) => {
-        let status;
-
-        if (value === "filled") {
-          status = <StatusCell icon="done" color="success" status="Filled" />;
-        } else {
-          status = <StatusCell icon="close" color="error" status="Not" />;
-        }
-
-        return status;
-      },
-    },
-    {
-      Header: "状态 （正常 | 已禁用）",
-      accessor: "status",
-      Cell: ({ value }) => {
-        let status;
-
-        if (value === "unblocked") {
-          status = <StatusCell icon="done" color="success" status="Unblocked" />;
-        } else {
-          status = <StatusCell icon="close" color="error" status="Blocked" />;
-        }
-
-        return status;
-      },
-    },
-    {
-      Header: "注册时间",
-      accessor: "reg_time",
+      Header: "英文名称",
+      accessor: "en_name",
       Cell: ({ value }) => <DefaultCell value={value} />,
     },
     {
@@ -98,7 +47,7 @@ const dataTableData = {
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
               <MDBox mb={1}>
-                <Link to="/metadata/degree/addOrUpdate">
+                <Link to="/metadata/school/addOrUpdate/">
                   <MDButton variant="outlined" color="dark">
                     编辑
                   </MDButton>
@@ -120,58 +69,34 @@ const dataTableData = {
 
   rows: [
     {
-      id: "#10421",
-      phone: "156890234",
-      reg_time: "1 Nov, 10:20 AM",
-      satus: "blocked",
-      verified_status: "verified",
-      name: "Orlando Imieto",
-      filled: "filled",
+      degree_id: 1,
+      name: "学术学位博士",
+      en_name: "Academic PhD",
     },
     {
-      id: "#10421",
-      phone: "156890234",
-      reg_time: "1 Nov, 10:20 AM",
-      satus: "blocked",
-      verified_status: "verified",
-      name: "Orlando Imieto",
-      filled: "filled",
+      degree_id: 2,
+      name: "本科生",
+      en_name: "Undergraduates",
     },
     {
-      id: "#10421",
-      phone: "156890234",
-      reg_time: "1 Nov, 10:20 AM",
-      satus: "blocked",
-      verified_status: "verified",
-      name: "Orlando Imieto",
-      filled: "filled",
+      degree_id: 3,
+      name: "学术学位硕士",
+      en_name: "Academic Master",
     },
     {
-      id: "#10421",
-      phone: "156890234",
-      reg_time: "1 Nov, 10:20 AM",
-      satus: "blocked",
-      verified_status: "verified",
-      name: "Orlando Imieto",
-      filled: "filled",
+      degree_id: 4,
+      name: "专业学位博士",
+      en_name: "Professional PhD",
     },
     {
-      id: "#10421",
-      phone: "156890234",
-      reg_time: "1 Nov, 10:20 AM",
-      satus: "blocked",
-      verified_status: "verified",
-      name: "Orlando Imieto",
-      filled: "filled",
+      degree_id: 5,
+      name: "专业学位硕士",
+      en_name: "Professional Master",
     },
     {
-      id: "#10421",
-      phone: "156890234",
-      reg_time: "1 Nov, 10:20 AM",
-      satus: "blocked",
-      verified_status: "verified",
-      name: "Orlando Imieto",
-      filled: "filled",
+      degree_id: 6,
+      name: "专业博士",
+      en_name: "Professional Doctorate",
     },
   ],
 };
