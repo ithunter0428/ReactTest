@@ -85,7 +85,7 @@ function SchoolForm() {
                     <MDInput type="text" label="中文名称" fullWidth />
                   </MDBox>
                   <MDBox mb={2}>
-                    <MDInput type="password" label="英文名称" fullWidth />
+                    <MDInput type="text" label="英文名称" fullWidth />
                   </MDBox>
                   <MDBox mt={4} mb={1}>
                     <MDButton variant="gradient" color="info" fullWidth>
