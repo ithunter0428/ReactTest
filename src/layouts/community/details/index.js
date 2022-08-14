@@ -13,13 +13,16 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
+import { useNavigate } from "react-router-dom";
 // @mui material components
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
+import Icon from "@mui/material/Icon";
 // import Autocomplete from "@mui/material/Autocomplete";
 
 // Material Dashboard 2 PRO React components
 import MDBox from "components/MDBox";
+import MDButton from "components/MDButton";
 import Divider from "@mui/material/Divider";
 import MDTypography from "components/MDTypography";
 
@@ -31,6 +34,8 @@ import UserTable from "layouts/community/details/table";
 import profilePicture from "assets/images/team-3.jpg";
 
 function CommunityDetails() {
+  const navigate = useNavigate();
+
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -38,6 +43,12 @@ function CommunityDetails() {
         <Card>
           <MDBox p={3} lineHeight={1}>
             <MDBox mt={1}>
+              {/* Back */}
+              <Grid item xs={12} md={12} sx={{ textAlign: "right" }} mb={2} mr={2}>
+                <MDButton variant="outlined" color="dark" onClick={() => navigate(-1)}>
+                  <Icon>arrow_left</Icon>&nbsp; 返回
+                </MDButton>
+              </Grid>
               <MDBox mt={1}>
                 <Grid container spacing={3} mb={3}>
                   {/* CommunityId */}

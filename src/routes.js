@@ -6,6 +6,11 @@ import CardVerificationList from "layouts/verification/studentcard/list";
 import CommunityList from "layouts/community/list";
 import PostList from "layouts/post/list";
 import AdminUserList from "layouts/adminuser/list";
+import SchoolManagement from "layouts/metadata/school/list";
+import DegreeManagement from "layouts/metadata/degree/list";
+import MajorManagement from "layouts/metadata/major/list";
+import SkillManagement from "layouts/metadata/skill/list";
+import HobbyManagement from "layouts/metadata/hobby/list";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
@@ -54,31 +59,31 @@ const routes = [
         name: "学校管理",
         key: "school",
         route: "/metadata/school",
-        component: <SignInBasic />,
+        component: <SchoolManagement />,
       },
       {
         name: "学位管理",
         key: "degree",
         route: "/metadata/degree",
-        component: <SignInBasic />,
+        component: <DegreeManagement />,
       },
       {
         name: "专业管理",
         key: "major",
         route: "/metadata/major",
-        component: <SignInBasic />,
+        component: <MajorManagement />,
       },
       {
         name: "技能管理",
         key: "skill",
         route: "/metadata/skill",
-        component: <SignInBasic />,
+        component: <SkillManagement />,
       },
       {
         name: "爱好管理",
         key: "hobby",
         route: "/metadata/hobby",
-        component: <SignInBasic />,
+        component: <HobbyManagement />,
       },
     ],
   },
