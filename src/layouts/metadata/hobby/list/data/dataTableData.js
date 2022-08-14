@@ -57,12 +57,12 @@ const dataTableData = {
     {
       Header: "",
       accessor: "action",
-      Cell: () => (
+      Cell: ({ row }) => (
         <MDBox mt={2}>
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
               <MDBox mb={1}>
-                <Link to="/metadata/skill/addOrUpdate">
+                <Link to={`/metadata/hobby/addOrUpdate?id=${row.original.hobby_id}`}>
                   <MDButton variant="outlined" color="dark">
                     编辑
                   </MDButton>
