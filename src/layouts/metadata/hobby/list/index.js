@@ -18,7 +18,7 @@ import { Link } from "react-router-dom";
 // @mui material components
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
-import Autocomplete from "@mui/material/Autocomplete";
+// import Autocomplete from "@mui/material/Autocomplete";
 import Icon from "@mui/material/Icon";
 // Material Dashboard 2 PRO React components
 import MDBox from "components/MDBox";
@@ -54,8 +54,8 @@ function UserList() {
                     {/* Search Input */}
                     <MDBox mb={2}>
                       <MDInput
-                        label="捜名称或手机号"
-                        placeholder="捜名称或手机号"
+                        label="搜名称"
+                        placeholder="搜名称"
                         variant="outlined"
                         value={key}
                         onChange={(e) => setKey(e.target.value)}
@@ -64,13 +64,13 @@ function UserList() {
                     </MDBox>
                   </Grid>
                   {/* Filter */}
-                  <Grid item xs={12} sm={2} ml={3} sx={{ mt: 1 }}>
+                  {/* <Grid item xs={12} sm={2} ml={3} sx={{ mt: 1 }}>
                     <Autocomplete
                       defaultValue="全部"
                       options={["全部"]}
                       renderInput={(params) => <MDInput {...params} variant="standard" />}
                     />
-                  </Grid>
+                  </Grid> */}
                   {/* Search Button */}
                   <Grid item xs={12} sm={5} ml={3}>
                     <MDBox mb={1}>
@@ -86,7 +86,7 @@ function UserList() {
           <Grid item xs={12} md={12} sx={{ textAlign: "right" }} mb={2} mr={2}>
             <Link to="/metadata/hobby/addOrUpdate">
               <MDButton variant="gradient" color="success">
-                <Icon>add</Icon>&nbsp; 新建
+                <Icon>add</Icon>&nbsp; 新增
               </MDButton>
             </Link>
           </Grid>

@@ -20,7 +20,7 @@ import { Link } from "react-router-dom";
 
 import IdCell from "layouts/metadata/skill/list/components/IdCell";
 import DefaultCell from "layouts/metadata/skill/list/components/DefaultCell";
-import CustomerCell from "layouts/metadata/school/list/components/CustomerCell";
+import CustomerCell from "layouts/metadata/skill/list/components/CustomerCell";
 
 import Grid from "@mui/material/Grid";
 
