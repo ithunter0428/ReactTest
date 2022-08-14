@@ -31,15 +31,36 @@ import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import DataTable from "examples/Tables/DataTable";
 
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+
 // Data
 import dataTableData from "layouts/metadata/degree/list/data/dataTableData";
 
 function UserList() {
   const [key, setKey] = useState("");
   // const [category, setCategory] = useState('全部')
+  const [open, setOpen] = useState(false);
+
   const handleSearch = () => {
     // dataTableData.rows = [];
   };
+
+  const deleteRow = () => {
+    setOpen(true);
+  };
+
+  const handleDelete = () => {
+    setOpen(false);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -90,7 +111,26 @@ function UserList() {
               </MDButton>
             </Link>
           </Grid>
-          <DataTable table={dataTableData} entriesPerPage={false} />
+          <DataTable table={dataTableData(deleteRow)} entriesPerPage={false} />
+          <Dialog
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">Confirm</DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                Do you really want to delete this data?
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <MDButton autoFocus onClick={handleClose}>
+                No
+              </MDButton>
+              <MDButton onClick={handleDelete}>Yes</MDButton>
+            </DialogActions>
+          </Dialog>
         </Card>
       </MDBox>
     </DashboardLayout>

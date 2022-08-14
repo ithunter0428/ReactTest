@@ -27,7 +27,7 @@ import Grid from "@mui/material/Grid";
 import MDBox from "components/MDBox";
 import MDButton from "components/MDButton";
 
-const dataTableData = {
+const dataTableData = (deleteRow) => ({
   columns: [
     {
       Header: "爱好ID",
@@ -71,7 +71,12 @@ const dataTableData = {
             </Grid>
             <Grid item xs={12} sm={6}>
               <MDBox mb={1}>
-                <MDButton variant="outlined" color="dark" size="small">
+                <MDButton
+                  variant="outlined"
+                  color="dark"
+                  size="small"
+                  onClick={() => deleteRow(row.original.school_id)}
+                >
                   删除
                 </MDButton>
               </MDBox>
@@ -244,6 +249,6 @@ const dataTableData = {
       create_user_name: "系统创建",
     },
   ],
-};
+});
 
 export default dataTableData;
