@@ -18,8 +18,8 @@ Coded by www.creative-tim.com
 
 import { Link } from "react-router-dom";
 
-import IdCell from "layouts/metadata/school/list/components/IdCell";
-import DefaultCell from "layouts/metadata/school/list/components/DefaultCell";
+import IdCell from "layouts/metadata/major/list/components/IdCell";
+import DefaultCell from "layouts/metadata/major/list/components/DefaultCell";
 
 import Grid from "@mui/material/Grid";
 
@@ -47,7 +47,7 @@ const dataTableData = {
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
               <MDBox mb={1}>
-                <Link to="/metadata/school/addOrUpdate/">
+                <Link to="/metadata/major/addOrUpdate">
                   <MDButton variant="outlined" color="dark">
                     编辑
                   </MDButton>
