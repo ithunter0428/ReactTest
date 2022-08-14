@@ -30,11 +30,15 @@ import MDButton from "components/MDButton";
 
 const dataTableData = {
   columns: [
-    { Header: "学校ID", accessor: "school_id", Cell: ({ value }) => <IdCell id={value} /> },
+    {
+      Header: "学校ID",
+      accessor: "school_id",
+      Cell: ({ value }) => <IdCell id={value.toString()} />,
+    },
     {
       Header: "图标",
       accessor: "img_url",
-      Cell: ({ value }) => <CustomerCell image={value} />,
+      Cell: ({ value }) => <CustomerCell image={value} name="" />,
     },
     {
       Header: "中文名称",
