@@ -108,12 +108,12 @@ const dataTableData = {
               <MDBox mb={1}>
                 {row.original.state === 1 && (
                   <MDButton variant="outlined" color="dark" size="small">
-                    <Icon color="dark">block</Icon>&nbsp;启用
+                    <Icon color="dark">block</Icon>&nbsp;禁用
                   </MDButton>
                 )}
                 {row.original.state !== 1 && (
                   <MDButton variant="outlined" color="dark" size="small">
-                    <Icon color="info">check</Icon>&nbsp;禁用
+                    <Icon color="info">check</Icon>&nbsp;启用
                   </MDButton>
                 )}
               </MDBox>

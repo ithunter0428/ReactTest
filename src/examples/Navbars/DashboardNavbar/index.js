@@ -120,7 +120,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
             {/* Current User */}
             <MDBox mb={1} lineHeight={0}>
               <MDTypography variant="caption" fontWeight="regular" color="text">
-                Current Name:&nbsp;&nbsp;&nbsp;
+                当前用户:&nbsp;&nbsp;&nbsp;
                 <MDTypography variant="caption" fontWeight="medium" textTransform="capitalize">
                   Chris Lee
                 </MDTypography>
@@ -128,13 +128,13 @@ function DashboardNavbar({ absolute, light, isMini }) {
             </MDBox>
             {/* Change Password */}
             <MDBox ml={2} mb={1}>
-              <Link to="/authentication/sign-in/basic">
+              <Link to="/change_pass">
                 <MDButton size="small">修改密码</MDButton>
               </Link>
             </MDBox>
             {/* Logout */}
             <MDBox ml={1} mb={1}>
-              <Link to="/authentication/sign-in/basic">
+              <Link to="/authentication/sign-in">
                 <MDButton size="small">退出登录</MDButton>
               </Link>
             </MDBox>
