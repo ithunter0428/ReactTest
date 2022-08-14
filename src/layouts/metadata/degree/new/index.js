@@ -30,8 +30,6 @@ import MDBadge from "components/MDBadge";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 
-import profilePicture from "assets/images/team-3.jpg";
-
 function SchoolForm() {
   return (
     <DashboardLayout>
@@ -50,46 +48,26 @@ function SchoolForm() {
                     <Grid container spaing={2} mt={2} mb={3}>
                       <Grid item>
                         <MDTypography variant="h6" fontWeight="regular" color="text">
-                          用户名:&nbsp;&nbsp;&nbsp;
+                          学位id:&nbsp;&nbsp;&nbsp;
                         </MDTypography>
                       </Grid>
                       <Grid item sm={8}>
                         <MDTypography variant="h6" fontWeight="medium" color="text">
-                          Chris
+                          1
                         </MDTypography>
                       </Grid>
                     </Grid>
                   </MDBox>
                   {/*  */}
-                  {/* Image */}
                   <MDBox mb={2}>
-                    <Grid container spaing={2}>
-                      <Grid item>
-                        <MDTypography variant="h6" fontWeight="regular" color="text">
-                          头像:&nbsp;&nbsp;&nbsp;
-                        </MDTypography>
-                      </Grid>
-                      <Grid item sm={3}>
-                        <MDBox
-                          component="img"
-                          src={profilePicture}
-                          alt="Product Image"
-                          shadow="lg"
-                          width="100%"
-                        />
-                      </Grid>
-                    </Grid>
-                  </MDBox>
-                  {/*  */}
-                  <MDBox mb={2}>
-                    <MDInput type="text" label="用户名" fullWidth />
+                    <MDInput type="text" label="中文名称" fullWidth />
                   </MDBox>
                   <MDBox mb={2}>
-                    <MDInput type="password" label="登陆密码" fullWidth />
+                    <MDInput type="text" label="英文名称" fullWidth />
                   </MDBox>
                   <MDBox mt={4} mb={1}>
                     <MDButton variant="gradient" color="info" fullWidth>
-                      新建
+                      保存
                     </MDButton>
                   </MDBox>
                 </MDBox>

@@ -53,32 +53,28 @@ const dataTableData = {
     {
       Header: "",
       accessor: "action",
-      Cell: ({ row }) => {
-        const { original } = row;
-        const { school_id } = original;
-        return (
-          <MDBox mt={2}>
-            <Grid container spacing={3}>
-              <Grid item xs={12} sm={6}>
-                <MDBox mb={1}>
-                  <Link to={`/metadata/school/addOrUpdate?id=${school_id}`}>
-                    <MDButton variant="outlined" color="dark">
-                      编辑
-                    </MDButton>
-                  </Link>
-                </MDBox>
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <MDBox mb={1}>
+      Cell: ({ row }) => (
+        <MDBox mt={2}>
+          <Grid container spacing={3}>
+            <Grid item xs={12} sm={6}>
+              <MDBox mb={1}>
+                <Link to={`/metadata/school/addOrUpdate?id=${row.original.school_id}`}>
                   <MDButton variant="outlined" color="dark">
-                    删除
+                    编辑
                   </MDButton>
-                </MDBox>
-              </Grid>
+                </Link>
+              </MDBox>
             </Grid>
-          </MDBox>
-        );
-      },
+            <Grid item xs={12} sm={6}>
+              <MDBox mb={1}>
+                <MDButton variant="outlined" color="dark">
+                  删除
+                </MDButton>
+              </MDBox>
+            </Grid>
+          </Grid>
+        </MDBox>
+      ),
     },
   ],
 

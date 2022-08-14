@@ -55,7 +55,7 @@ function SchoolForm() {
                       </Grid>
                       <Grid item sm={8}>
                         <MDTypography variant="h6" fontWeight="medium" color="text">
-                          Chris
+                          1
                         </MDTypography>
                       </Grid>
                     </Grid>
