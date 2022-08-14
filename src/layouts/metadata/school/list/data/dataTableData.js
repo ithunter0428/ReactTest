@@ -8,12 +8,13 @@
 
 Coded by www.creative-tim.com
 
- =========================================================
+=========================================================
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
 /* eslint-disable react/prop-types */
+/* eslint-disable camelcase */
 // ProductsList page components
 
 import { Link } from "react-router-dom";
@@ -48,28 +49,32 @@ const dataTableData = {
     {
       Header: "",
       accessor: "action",
-      Cell: () => (
-        <MDBox mt={2}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} sm={6}>
-              <MDBox mb={1}>
-                <Link to="/metadata/school/addOrUpdate/">
+      Cell: ({ row }) => {
+        const { original } = row;
+        const { school_id } = original;
+        return (
+          <MDBox mt={2}>
+            <Grid container spacing={3}>
+              <Grid item xs={12} sm={6}>
+                <MDBox mb={1}>
+                  <Link to={`/metadata/school/addOrUpdate?id=${school_id}`}>
+                    <MDButton variant="outlined" color="dark">
+                      编辑
+                    </MDButton>
+                  </Link>
+                </MDBox>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <MDBox mb={1}>
                   <MDButton variant="outlined" color="dark">
-                    编辑
+                    删除
                   </MDButton>
-                </Link>
-              </MDBox>
+                </MDBox>
+              </Grid>
             </Grid>
-            <Grid item xs={12} sm={6}>
-              <MDBox mb={1}>
-                <MDButton variant="outlined" color="dark">
-                  删除
-                </MDButton>
-              </MDBox>
-            </Grid>
-          </Grid>
-        </MDBox>
-      ),
+          </MDBox>
+        );
+      },
     },
   ],
 
