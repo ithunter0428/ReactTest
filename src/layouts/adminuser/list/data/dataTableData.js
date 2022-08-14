@@ -32,32 +32,32 @@ const dataTableData = {
     {
       Header: "后台用户",
       width: "15%",
-      accessor: "id",
+      accessor: "tools_user_id",
       Cell: ({ value }) => <IdCell id={value} />,
     },
     {
       Header: "用户名",
       width: "20%",
-      accessor: "phone",
+      accessor: "username",
       Cell: ({ value }) => <DefaultCell value={value} />,
     },
     {
       Header: "权限",
       width: "20%",
-      accessor: "name",
+      accessor: "role_id",
       Cell: ({ value }) => <DefaultCell value={value} />,
     },
     {
       Header: "状态",
       width: "20%",
-      accessor: "verified_status",
+      accessor: "state",
       Cell: ({ value }) => {
         let status;
 
-        if (value === "verified") {
-          status = <StatusCell icon="done" color="success" status="Verified" />;
+        if (value === 1) {
+          status = <StatusCell icon="done" color="success" status="Normal" />;
         } else {
-          status = <StatusCell icon="close" color="error" status="Unverified" />;
+          status = <StatusCell icon="close" color="error" status="Blocked" />;
         }
 
         return status;
@@ -94,58 +94,22 @@ const dataTableData = {
 
   rows: [
     {
-      id: "#10421",
-      phone: "156890234",
-      reg_time: "1 Nov, 10:20 AM",
-      satus: "blocked",
-      verified_status: "verified",
-      name: "Orlando Imieto",
-      filled: "filled",
+      tools_user_id: 1,
+      username: "sugar",
+      role_id: 1,
+      state: 1,
     },
     {
-      id: "#10421",
-      phone: "156890234",
-      reg_time: "1 Nov, 10:20 AM",
-      satus: "blocked",
-      verified_status: "verified",
-      name: "Orlando Imieto",
-      filled: "filled",
+      tools_user_id: 2,
+      username: "sugar2",
+      role_id: 1,
+      state: 1,
     },
     {
-      id: "#10421",
-      phone: "156890234",
-      reg_time: "1 Nov, 10:20 AM",
-      satus: "blocked",
-      verified_status: "verified",
-      name: "Orlando Imieto",
-      filled: "filled",
-    },
-    {
-      id: "#10421",
-      phone: "156890234",
-      reg_time: "1 Nov, 10:20 AM",
-      satus: "blocked",
-      verified_status: "verified",
-      name: "Orlando Imieto",
-      filled: "filled",
-    },
-    {
-      id: "#10421",
-      phone: "156890234",
-      reg_time: "1 Nov, 10:20 AM",
-      satus: "blocked",
-      verified_status: "verified",
-      name: "Orlando Imieto",
-      filled: "filled",
-    },
-    {
-      id: "#10421",
-      phone: "156890234",
-      reg_time: "1 Nov, 10:20 AM",
-      satus: "blocked",
-      verified_status: "verified",
-      name: "Orlando Imieto",
-      filled: "filled",
+      tools_user_id: 3,
+      username: "sugar3",
+      role_id: 1,
+      state: 1,
     },
   ],
 };

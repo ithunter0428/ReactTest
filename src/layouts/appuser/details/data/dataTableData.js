@@ -73,10 +73,9 @@ const dataTableData = {
     {
       Header: "Status",
       accessor: "status",
-      Cell: ({ value }) => {
+      Cell: (props) => {
         let status;
-
-        if (value === "unblocked") {
+        if (props.value === "unblocked") {
           status = <StatusCell icon="done" color="success" status="Unblocked" />;
         } else {
           status = <StatusCell icon="close" color="error" status="Blocked" />;

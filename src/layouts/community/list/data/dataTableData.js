@@ -20,7 +20,6 @@ import { Link } from "react-router-dom";
 
 import IdCell from "layouts/community/list/components/IdCell";
 import DefaultCell from "layouts/community/list/components/DefaultCell";
-import StatusCell from "layouts/community/list/components/StatusCell";
 
 import Grid from "@mui/material/Grid";
 
@@ -29,12 +28,19 @@ import MDButton from "components/MDButton";
 
 const dataTableData = {
   columns: [
-    { Header: "社区ID", accessor: "id", width: "15%", Cell: ({ value }) => <IdCell id={value} /> },
+    {
+      Header: "社区ID",
+      accessor: "community_id",
+      width: "15%",
+      Cell: ({ value }) => <IdCell id={value} />,
+    },
     {
       Header: "图标",
-      accessor: "icon",
+      accessor: "img_url",
       width: "20%",
-      Cell: ({ value }) => <DefaultCell value={value} />,
+      Cell: ({ value }) => (
+        <MDBox component="img" src={value} alt="Product Image" shadow="lg" width="30px" />
+      ),
     },
     {
       Header: "名称",
@@ -44,35 +50,15 @@ const dataTableData = {
     },
     {
       Header: "人数",
-      accessor: "verified_status",
+      accessor: "user_count",
       width: "15%",
-      Cell: ({ value }) => {
-        let status;
-
-        if (value === "verified") {
-          status = <StatusCell icon="done" color="success" status="Verified" />;
-        } else {
-          status = <StatusCell icon="close" color="error" status="Unverified" />;
-        }
-
-        return status;
-      },
+      Cell: ({ value }) => <DefaultCell value={value} />,
     },
     {
       Header: "创建人",
-      accessor: "filled",
+      accessor: "creator",
       width: "15%",
-      Cell: ({ value }) => {
-        let status;
-
-        if (value === "filled") {
-          status = <StatusCell icon="done" color="success" status="Filled" />;
-        } else {
-          status = <StatusCell icon="close" color="error" status="Not" />;
-        }
-
-        return status;
-      },
+      Cell: ({ value }) => <DefaultCell value={value} />,
     },
     {
       Header: "",
@@ -105,58 +91,44 @@ const dataTableData = {
 
   rows: [
     {
-      id: "#10421",
-      phone: "156890234",
-      reg_time: "1 Nov, 10:20 AM",
-      satus: "blocked",
-      verified_status: "verified",
-      name: "Orlando Imieto",
-      filled: "filled",
+      community_id: 3,
+      name: "苏测社区1",
+      img_url: "",
+      state: 1,
+      creator: "苏玉博",
+      user_count: 8,
     },
     {
-      id: "#10421",
-      phone: "156890234",
-      reg_time: "1 Nov, 10:20 AM",
-      satus: "blocked",
-      verified_status: "verified",
-      name: "Orlando Imieto",
-      filled: "filled",
+      community_id: 5,
+      name: "天下足球⚽️",
+      img_url: "https://banqu-v2.oss-accelerate.aliyuncs.com/banquios/community/1659449744000.png",
+      state: 1,
+      creator: "于思楠",
+      user_count: 5,
     },
     {
-      id: "#10421",
-      phone: "156890234",
-      reg_time: "1 Nov, 10:20 AM",
-      satus: "blocked",
-      verified_status: "verified",
-      name: "Orlando Imieto",
-      filled: "filled",
+      community_id: 9,
+      name: "尽享美食",
+      img_url: "https://banqu-v2.oss-accelerate.aliyuncs.com/banquios/community/1659449666000.png",
+      state: 1,
+      creator: "于思楠",
+      user_count: 6,
     },
     {
-      id: "#10421",
-      phone: "156890234",
-      reg_time: "1 Nov, 10:20 AM",
-      satus: "blocked",
-      verified_status: "verified",
-      name: "Orlando Imieto",
-      filled: "filled",
+      community_id: 10,
+      name: "苏测3",
+      img_url: "",
+      state: 1,
+      creator: "苏玉博",
+      user_count: 2,
     },
     {
-      id: "#10421",
-      phone: "156890234",
-      reg_time: "1 Nov, 10:20 AM",
-      satus: "blocked",
-      verified_status: "verified",
-      name: "Orlando Imieto",
-      filled: "filled",
-    },
-    {
-      id: "#10421",
-      phone: "156890234",
-      reg_time: "1 Nov, 10:20 AM",
-      satus: "blocked",
-      verified_status: "verified",
-      name: "Orlando Imieto",
-      filled: "filled",
+      community_id: 11,
+      name: "苏测4",
+      img_url: "",
+      state: 1,
+      creator: "苏玉博",
+      user_count: 3,
     },
   ],
 };

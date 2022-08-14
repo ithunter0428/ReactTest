@@ -48,12 +48,16 @@ function Basic() {
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
 
   const handleSignIn = async () => {
-    // const { data } = await axios.post(`${BASE_URL}/api/tools_user/login`, {
-    //   headers: {
-    //     "Access-Control-Allow-Origin": "*",
-    //     "Content-Type": "application/json",
-    //   },
-    // });
+    // const { data } = await axios.post(
+    //   `${BASE_URL}/api/tools_user/login`,
+    //   { username: "sugar2", pwd: "0000" },
+    //   {
+    //     headers: {
+    //       "Access-Control-Allow-Origin": "*",
+    //       "Content-Type": "application/json",
+    //     },
+    //   }
+    // );
     // console.log(data);
     navigate("/mainpage");
   };
