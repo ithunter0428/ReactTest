@@ -28,7 +28,7 @@ import Grid from "@mui/material/Grid";
 import MDBox from "components/MDBox";
 import MDButton from "components/MDButton";
 
-const dataTableData = {
+const dataTableData = (deleteRow) => ({
   columns: [
     {
       Header: "学校ID",
@@ -59,7 +59,7 @@ const dataTableData = {
             <Grid item xs={12} sm={6}>
               <MDBox mb={1}>
                 <Link to={`/metadata/school/addOrUpdate?id=${row.original.school_id}`}>
-                  <MDButton variant="outlined" color="dark">
+                  <MDButton variant="outlined" color="dark" size="small">
                     编辑
                   </MDButton>
                 </Link>
@@ -67,7 +67,12 @@ const dataTableData = {
             </Grid>
             <Grid item xs={12} sm={6}>
               <MDBox mb={1}>
-                <MDButton variant="outlined" color="dark">
+                <MDButton
+                  variant="outlined"
+                  color="dark"
+                  size="small"
+                  onClick={() => deleteRow(row.original.school_id)}
+                >
                   删除
                 </MDButton>
               </MDBox>
@@ -213,6 +218,6 @@ const dataTableData = {
       en_name: "Beijing Forestry University",
     },
   ],
-};
+});
 
 export default dataTableData;
