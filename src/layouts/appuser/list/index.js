@@ -13,6 +13,7 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
+import { useState } from "react";
 // @mui material components
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
@@ -32,7 +33,12 @@ import DataTable from "examples/Tables/DataTable";
 // Data
 import dataTableData from "layouts/appuser/list/data/dataTableData";
 
-function OrderList() {
+function UserList() {
+  const [key, setKey] = useState("");
+  // const [category, setCategory] = useState('全部')
+  const handleSearch = () => {
+    // dataTableData.rows = [];
+  };
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -50,6 +56,8 @@ function OrderList() {
                         label="捜名称或手机号"
                         placeholder="捜名称或手机号"
                         variant="outlined"
+                        value={key}
+                        onChange={(e) => setKey(e.target.value)}
                         fullWidth
                       />
                     </MDBox>
@@ -65,7 +73,7 @@ function OrderList() {
                   {/* Search Button */}
                   <Grid item xs={12} sm={5} ml={3}>
                     <MDBox mb={1}>
-                      <MDButton variant="gradient" color="info">
+                      <MDButton variant="gradient" color="info" onClick={handleSearch}>
                         搜索
                       </MDButton>
                     </MDBox>
@@ -81,4 +89,4 @@ function OrderList() {
   );
 }
 
-export default OrderList;
+export default UserList;

@@ -21,9 +21,6 @@ import Card from "@mui/material/Card";
 // Material Dashboard 2 PRO React components
 import MDBox from "components/MDBox";
 import Divider from "@mui/material/Divider";
-import MDAvatar from "components/MDAvatar";
-// import MDInput from "components/MDInput";
-// import MDButton from "components/MDButton";
 import MDTypography from "components/MDTypography";
 
 // Material Dashboard 2 PRO React examples
@@ -32,7 +29,7 @@ import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 
 import profilePicture from "assets/images/team-3.jpg";
 
-function OrderList() {
+function UserList() {
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -45,12 +42,12 @@ function OrderList() {
                   {/* UserId */}
                   <Grid item sm={1}>
                     <MDTypography variant="caption" fontWeight="regular" color="text">
-                      Current Name:&nbsp;&nbsp;&nbsp;
+                      用户ID :&nbsp;&nbsp;&nbsp;
                     </MDTypography>
                   </Grid>
                   <Grid item sm={3}>
                     <MDTypography variant="caption" fontWeight="medium">
-                      Chris Lee
+                      1
                     </MDTypography>
                   </Grid>
                 </Grid>
@@ -62,18 +59,24 @@ function OrderList() {
                     <Grid container spaing={2}>
                       <Grid item sm={3}>
                         <MDTypography variant="caption" fontWeight="regular" color="text">
-                          Current Name:&nbsp;&nbsp;&nbsp;
+                          头像:&nbsp;&nbsp;&nbsp;
                         </MDTypography>
                       </Grid>
-                      <Grid item sm={9}>
-                        <MDAvatar src={profilePicture} alt="" size="sm" />
+                      <Grid item sm={3}>
+                        <MDBox
+                          component="img"
+                          src={profilePicture}
+                          alt="Product Image"
+                          shadow="lg"
+                          width="100%"
+                        />
                       </Grid>
                     </Grid>
                     {/* Name */}
                     <Grid container spaing={2} mt={2}>
                       <Grid item sm={3}>
                         <MDTypography variant="caption" fontWeight="regular" color="text">
-                          Current Name:&nbsp;&nbsp;&nbsp;
+                          用户名:&nbsp;&nbsp;&nbsp;
                         </MDTypography>
                       </Grid>
                       <Grid item sm={9}>
@@ -86,7 +89,7 @@ function OrderList() {
                     <Grid container spaing={2} mt={2}>
                       <Grid item sm={3}>
                         <MDTypography variant="caption" fontWeight="regular" color="text">
-                          Current Name:&nbsp;&nbsp;&nbsp;
+                          姓名:&nbsp;&nbsp;&nbsp;
                         </MDTypography>
                       </Grid>
                       <Grid item sm={9}>
@@ -99,7 +102,7 @@ function OrderList() {
                     <Grid container spaing={2} mt={2}>
                       <Grid item sm={3}>
                         <MDTypography variant="caption" fontWeight="regular" color="text">
-                          Current Name:&nbsp;&nbsp;&nbsp;
+                          手机区号:&nbsp;&nbsp;&nbsp;
                         </MDTypography>
                       </Grid>
                       <Grid item sm={9}>
@@ -112,7 +115,7 @@ function OrderList() {
                     <Grid container spaing={2} mt={2}>
                       <Grid item sm={3}>
                         <MDTypography variant="caption" fontWeight="regular" color="text">
-                          Current Name:&nbsp;&nbsp;&nbsp;
+                          手机号:&nbsp;&nbsp;&nbsp;
                         </MDTypography>
                       </Grid>
                       <Grid item sm={9}>
@@ -128,23 +131,29 @@ function OrderList() {
                     <Grid container spaing={2}>
                       <Grid item sm={3}>
                         <MDTypography variant="caption" fontWeight="regular" color="text">
-                          Current Name:&nbsp;&nbsp;&nbsp;
+                          学生卡:&nbsp;&nbsp;&nbsp;
                         </MDTypography>
                       </Grid>
-                      <Grid item sm={9}>
-                        <MDAvatar src={profilePicture} alt="" size="sm" />
+                      <Grid item sm={3}>
+                        <MDBox
+                          component="img"
+                          src={profilePicture}
+                          alt="Product Image"
+                          shadow="lg"
+                          width="100%"
+                        />
                       </Grid>
                     </Grid>
                     {/* Name */}
                     <Grid container spaing={2} mt={2}>
                       <Grid item sm={3}>
                         <MDTypography variant="caption" fontWeight="regular" color="text">
-                          Current Name:&nbsp;&nbsp;&nbsp;
+                          认证状态:&nbsp;&nbsp;&nbsp;
                         </MDTypography>
                       </Grid>
                       <Grid item sm={9}>
                         <MDTypography variant="caption" fontWeight="medium" color="text">
-                          Chris
+                          认证失败 | 未认证 | 认证中
                         </MDTypography>
                       </Grid>
                     </Grid>
@@ -152,12 +161,12 @@ function OrderList() {
                     <Grid container spaing={2} mt={2}>
                       <Grid item sm={3}>
                         <MDTypography variant="caption" fontWeight="regular" color="text">
-                          Current Name:&nbsp;&nbsp;&nbsp;
+                          是否完善个人信息:&nbsp;&nbsp;&nbsp;
                         </MDTypography>
                       </Grid>
                       <Grid item sm={9}>
                         <MDTypography variant="caption" fontWeight="medium" color="text">
-                          Lee
+                          是 | 否
                         </MDTypography>
                       </Grid>
                     </Grid>
@@ -165,12 +174,12 @@ function OrderList() {
                     <Grid container spaing={2} mt={2}>
                       <Grid item sm={3}>
                         <MDTypography variant="caption" fontWeight="regular" color="text">
-                          Current Name:&nbsp;&nbsp;&nbsp;
+                          定位:&nbsp;&nbsp;&nbsp;
                         </MDTypography>
                       </Grid>
                       <Grid item sm={9}>
                         <MDTypography variant="caption" fontWeight="medium" color="text">
-                          +86
+                          北京
                         </MDTypography>
                       </Grid>
                     </Grid>
@@ -178,12 +187,12 @@ function OrderList() {
                     <Grid container spaing={2} mt={2}>
                       <Grid item sm={3}>
                         <MDTypography variant="caption" fontWeight="regular" color="text">
-                          Current Name:&nbsp;&nbsp;&nbsp;
+                          状态:&nbsp;&nbsp;&nbsp;
                         </MDTypography>
                       </Grid>
                       <Grid item sm={9}>
                         <MDTypography variant="caption" fontWeight="medium" color="text">
-                          12345624234
+                          正常 | 已禁用
                         </MDTypography>
                       </Grid>
                     </Grid>
@@ -194,18 +203,24 @@ function OrderList() {
                     <Grid container spaing={2}>
                       <Grid item sm={3}>
                         <MDTypography variant="caption" fontWeight="regular" color="text">
-                          Current Name:&nbsp;&nbsp;&nbsp;
+                          背景图:&nbsp;&nbsp;&nbsp;
                         </MDTypography>
                       </Grid>
-                      <Grid item sm={9}>
-                        <MDAvatar src={profilePicture} alt="" size="sm" />
+                      <Grid item sm={3}>
+                        <MDBox
+                          component="img"
+                          src={profilePicture}
+                          alt="Product Image"
+                          shadow="lg"
+                          width="100%"
+                        />
                       </Grid>
                     </Grid>
                     {/* Name */}
                     <Grid container spaing={2} mt={2}>
                       <Grid item sm={3}>
                         <MDTypography variant="caption" fontWeight="regular" color="text">
-                          Current Name:&nbsp;&nbsp;&nbsp;
+                          简介:&nbsp;&nbsp;&nbsp;
                         </MDTypography>
                       </Grid>
                       <Grid item sm={9}>
@@ -218,7 +233,7 @@ function OrderList() {
                     <Grid container spaing={2} mt={2}>
                       <Grid item sm={3}>
                         <MDTypography variant="caption" fontWeight="regular" color="text">
-                          Current Name:&nbsp;&nbsp;&nbsp;
+                          注册时间:&nbsp;&nbsp;&nbsp;
                         </MDTypography>
                       </Grid>
                       <Grid item sm={9}>
@@ -228,31 +243,6 @@ function OrderList() {
                       </Grid>
                     </Grid>
                     {/*  */}
-                    <Grid container spaing={2} mt={2}>
-                      <Grid item sm={3}>
-                        <MDTypography variant="caption" fontWeight="regular" color="text">
-                          Current Name:&nbsp;&nbsp;&nbsp;
-                        </MDTypography>
-                      </Grid>
-                      <Grid item sm={9}>
-                        <MDTypography variant="caption" fontWeight="medium" color="text">
-                          +86
-                        </MDTypography>
-                      </Grid>
-                    </Grid>
-                    {/*  */}
-                    <Grid container spaing={2} mt={2}>
-                      <Grid item sm={3}>
-                        <MDTypography variant="caption" fontWeight="regular" color="text">
-                          Current Name:&nbsp;&nbsp;&nbsp;
-                        </MDTypography>
-                      </Grid>
-                      <Grid item sm={9}>
-                        <MDTypography variant="caption" fontWeight="medium" color="text">
-                          12345624234
-                        </MDTypography>
-                      </Grid>
-                    </Grid>
                   </Grid>
                 </Grid>
                 {/*  */}
@@ -262,7 +252,7 @@ function OrderList() {
                   {/* UserId */}
                   <Grid item sm={1}>
                     <MDTypography variant="caption" fontWeight="regular" color="text">
-                      Current Name:&nbsp;&nbsp;&nbsp;
+                      技能:&nbsp;&nbsp;&nbsp;
                     </MDTypography>
                   </Grid>
                   <Grid item sm={3}>
@@ -276,7 +266,7 @@ function OrderList() {
                   {/* UserId */}
                   <Grid item sm={1}>
                     <MDTypography variant="caption" fontWeight="regular" color="text">
-                      Current Name:&nbsp;&nbsp;&nbsp;
+                      爱好:&nbsp;&nbsp;&nbsp;
                     </MDTypography>
                   </Grid>
                   <Grid item sm={3}>
@@ -294,7 +284,7 @@ function OrderList() {
                     <Grid container spaing={2} mt={2}>
                       <Grid item sm={3}>
                         <MDTypography variant="caption" fontWeight="regular" color="text">
-                          Current Name:&nbsp;&nbsp;&nbsp;
+                          教育经历:&nbsp;&nbsp;&nbsp;
                         </MDTypography>
                       </Grid>
                       <Grid item sm={9}>
@@ -311,27 +301,20 @@ function OrderList() {
                         >
                           <MDBox width="100%" display="flex" flexDirection="column" lineHeight={1}>
                             <MDBox mb={1} lineHeight={0}>
-                              <MDTypography variant="caption" fontWeight="regular" color="text">
-                                Company Name:&nbsp;&nbsp;&nbsp;
-                                <MDTypography variant="caption" fontWeight="medium">
-                                  Viking Burrito
-                                </MDTypography>
+                              <MDTypography variant="caption" fontWeight="medium">
+                                学校
                               </MDTypography>
                             </MDBox>
                             <MDBox mb={1} lineHeight={0}>
-                              <MDTypography variant="caption" fontWeight="regular" color="text">
-                                Email Address:&nbsp;&nbsp;&nbsp;
-                                <MDTypography variant="caption" fontWeight="medium">
-                                  oliver@burrito.com
-                                </MDTypography>
+                              <MDTypography variant="caption" fontWeight="medium">
+                                学位
                               </MDTypography>
                             </MDBox>
-                            <MDTypography variant="caption" fontWeight="regular" color="text">
-                              VAT Number:&nbsp;&nbsp;&nbsp;
+                            <MDBox mb={1} lineHeight={0}>
                               <MDTypography variant="caption" fontWeight="medium">
-                                FRB1235476
+                                专业
                               </MDTypography>
-                            </MDTypography>
+                            </MDBox>
                           </MDBox>
                         </MDBox>
                         <MDBox
@@ -347,27 +330,20 @@ function OrderList() {
                         >
                           <MDBox width="100%" display="flex" flexDirection="column" lineHeight={1}>
                             <MDBox mb={1} lineHeight={0}>
-                              <MDTypography variant="caption" fontWeight="regular" color="text">
-                                Company Name:&nbsp;&nbsp;&nbsp;
-                                <MDTypography variant="caption" fontWeight="medium">
-                                  Viking Burrito
-                                </MDTypography>
+                              <MDTypography variant="caption" fontWeight="medium">
+                                学校
                               </MDTypography>
                             </MDBox>
                             <MDBox mb={1} lineHeight={0}>
-                              <MDTypography variant="caption" fontWeight="regular" color="text">
-                                Email Address:&nbsp;&nbsp;&nbsp;
-                                <MDTypography variant="caption" fontWeight="medium">
-                                  oliver@burrito.com
-                                </MDTypography>
+                              <MDTypography variant="caption" fontWeight="medium">
+                                学位
                               </MDTypography>
                             </MDBox>
-                            <MDTypography variant="caption" fontWeight="regular" color="text">
-                              VAT Number:&nbsp;&nbsp;&nbsp;
+                            <MDBox mb={1} lineHeight={0}>
                               <MDTypography variant="caption" fontWeight="medium">
-                                FRB1235476
+                                专业
                               </MDTypography>
-                            </MDTypography>
+                            </MDBox>
                           </MDBox>
                         </MDBox>
                       </Grid>
@@ -380,7 +356,7 @@ function OrderList() {
                     <Grid container spaing={2} mt={2}>
                       <Grid item sm={3}>
                         <MDTypography variant="caption" fontWeight="regular" color="text">
-                          Current Name:&nbsp;&nbsp;&nbsp;
+                          工作经历:&nbsp;&nbsp;&nbsp;
                         </MDTypography>
                       </Grid>
                       <Grid item sm={9}>
@@ -397,27 +373,15 @@ function OrderList() {
                         >
                           <MDBox width="100%" display="flex" flexDirection="column" lineHeight={1}>
                             <MDBox mb={1} lineHeight={0}>
-                              <MDTypography variant="caption" fontWeight="regular" color="text">
-                                Company Name:&nbsp;&nbsp;&nbsp;
-                                <MDTypography variant="caption" fontWeight="medium">
-                                  Viking Burrito
-                                </MDTypography>
+                              <MDTypography variant="caption" fontWeight="medium">
+                                名称
                               </MDTypography>
                             </MDBox>
                             <MDBox mb={1} lineHeight={0}>
-                              <MDTypography variant="caption" fontWeight="regular" color="text">
-                                Email Address:&nbsp;&nbsp;&nbsp;
-                                <MDTypography variant="caption" fontWeight="medium">
-                                  oliver@burrito.com
-                                </MDTypography>
+                              <MDTypography variant="caption" fontWeight="medium">
+                                职位
                               </MDTypography>
                             </MDBox>
-                            <MDTypography variant="caption" fontWeight="regular" color="text">
-                              VAT Number:&nbsp;&nbsp;&nbsp;
-                              <MDTypography variant="caption" fontWeight="medium">
-                                FRB1235476
-                              </MDTypography>
-                            </MDTypography>
                           </MDBox>
                         </MDBox>
                         <MDBox
@@ -433,27 +397,15 @@ function OrderList() {
                         >
                           <MDBox width="100%" display="flex" flexDirection="column" lineHeight={1}>
                             <MDBox mb={1} lineHeight={0}>
-                              <MDTypography variant="caption" fontWeight="regular" color="text">
-                                Company Name:&nbsp;&nbsp;&nbsp;
-                                <MDTypography variant="caption" fontWeight="medium">
-                                  Viking Burrito
-                                </MDTypography>
+                              <MDTypography variant="caption" fontWeight="medium">
+                                名称
                               </MDTypography>
                             </MDBox>
                             <MDBox mb={1} lineHeight={0}>
-                              <MDTypography variant="caption" fontWeight="regular" color="text">
-                                Email Address:&nbsp;&nbsp;&nbsp;
-                                <MDTypography variant="caption" fontWeight="medium">
-                                  oliver@burrito.com
-                                </MDTypography>
+                              <MDTypography variant="caption" fontWeight="medium">
+                                职位
                               </MDTypography>
                             </MDBox>
-                            <MDTypography variant="caption" fontWeight="regular" color="text">
-                              VAT Number:&nbsp;&nbsp;&nbsp;
-                              <MDTypography variant="caption" fontWeight="medium">
-                                FRB1235476
-                              </MDTypography>
-                            </MDTypography>
                           </MDBox>
                         </MDBox>
                       </Grid>
@@ -471,4 +423,4 @@ function OrderList() {
   );
 }
 
-export default OrderList;
+export default UserList;

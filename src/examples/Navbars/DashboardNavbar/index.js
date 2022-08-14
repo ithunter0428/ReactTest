@@ -129,13 +129,13 @@ function DashboardNavbar({ absolute, light, isMini }) {
             {/* Change Password */}
             <MDBox ml={2} mb={1}>
               <Link to="/authentication/sign-in/basic">
-                <MDButton size="sm">修改密码</MDButton>
+                <MDButton size="small">修改密码</MDButton>
               </Link>
             </MDBox>
             {/* Logout */}
             <MDBox ml={1} mb={1}>
               <Link to="/authentication/sign-in/basic">
-                <MDButton size="sm">退出登录</MDButton>
+                <MDButton size="small">退出登录</MDButton>
               </Link>
             </MDBox>
           </MDBox>

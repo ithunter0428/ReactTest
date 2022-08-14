@@ -21,13 +21,6 @@ import { useNavigate } from "react-router-dom";
 // @mui material components
 import Card from "@mui/material/Card";
 import Switch from "@mui/material/Switch";
-// import Grid from "@mui/material/Grid";
-// import MuiLink from "@mui/material/Link";
-
-// // @mui icons
-// import FacebookIcon from "@mui/icons-material/Facebook";
-// import GitHubIcon from "@mui/icons-material/GitHub";
-// import GoogleIcon from "@mui/icons-material/Google";
 
 // Material Dashboard 2 PRO React components
 import MDBox from "components/MDBox";
@@ -42,6 +35,11 @@ import BasicLayout from "layouts/authentication/components/BasicLayout";
 // Images
 import bgImage from "assets/images/bg-sign-in-basic.jpeg";
 
+// BASE_URL
+// import BASE_URL from "service";
+
+// import axios from "axios";
+
 function Basic() {
   const [rememberMe, setRememberMe] = useState(false);
 
@@ -49,8 +47,14 @@ function Basic() {
 
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
 
-  const handleSignIn = () => {
-    // setLayout("dashboard");
+  const handleSignIn = async () => {
+    // const { data } = await axios.post(`${BASE_URL}/api/tools_user/login`, {
+    //   headers: {
+    //     "Access-Control-Allow-Origin": "*",
+    //     "Content-Type": "application/json",
+    //   },
+    // });
+    // console.log(data);
     navigate("/mainpage");
   };
   return (
