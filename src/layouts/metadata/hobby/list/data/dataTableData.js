@@ -63,7 +63,7 @@ const dataTableData = {
             <Grid item xs={12} sm={6}>
               <MDBox mb={1}>
                 <Link to={`/metadata/hobby/addOrUpdate?id=${row.original.hobby_id}`}>
-                  <MDButton variant="outlined" color="dark">
+                  <MDButton variant="outlined" color="dark" size="small">
                     编辑
                   </MDButton>
                 </Link>
@@ -71,7 +71,7 @@ const dataTableData = {
             </Grid>
             <Grid item xs={12} sm={6}>
               <MDBox mb={1}>
-                <MDButton variant="outlined" color="dark">
+                <MDButton variant="outlined" color="dark" size="small">
                   删除
                 </MDButton>
               </MDBox>

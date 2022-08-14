@@ -23,6 +23,7 @@ import DefaultCell from "layouts/appuser/details/components/DefaultCell";
 import StatusCell from "layouts/appuser/details/components/StatusCell";
 
 import Grid from "@mui/material/Grid";
+import Icon from "@mui/material/Icon";
 
 import MDBox from "components/MDBox";
 import MDButton from "components/MDButton";

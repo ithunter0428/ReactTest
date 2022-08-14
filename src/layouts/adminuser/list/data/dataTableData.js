@@ -23,6 +23,7 @@ import DefaultCell from "layouts/adminuser/list/components/DefaultCell";
 import StatusCell from "layouts/adminuser/list/components/StatusCell";
 
 import Grid from "@mui/material/Grid";
+import Icon from "@mui/material/Icon";
 
 import MDBox from "components/MDBox";
 import MDButton from "components/MDButton";
@@ -55,9 +56,9 @@ const dataTableData = {
         let status;
 
         if (value === 1) {
-          status = <StatusCell icon="done" color="success" status="Normal" />;
+          status = <StatusCell icon="done" color="success" status="正常" />;
         } else {
-          status = <StatusCell icon="close" color="error" status="Blocked" />;
+          status = <StatusCell icon="close" color="error" status="已禁用" />;
         }
 
         return status;
@@ -67,13 +68,13 @@ const dataTableData = {
       Header: "",
       accessor: "action",
       width: "25%",
-      Cell: () => (
-        <MDBox mt={2} style={{ width: 250 }}>
+      Cell: ({ row }) => (
+        <MDBox mt={2} style={{ width: 200 }}>
           <Grid container spacing={0}>
             <Grid item xs={12} sm={6}>
               <MDBox mb={1}>
                 <Link to="/user/details">
-                  <MDButton variant="outlined" color="dark">
+                  <MDButton variant="outlined" color="dark" size="small">
                     重置密码
                   </MDButton>
                 </Link>
@@ -81,9 +82,16 @@ const dataTableData = {
             </Grid>
             <Grid item xs={12} sm={6}>
               <MDBox mb={1}>
-                <MDButton variant="outlined" color="dark">
-                  启用|禁用
-                </MDButton>
+                {row.original.state === 1 && (
+                  <MDButton variant="outlined" color="dark" size="small">
+                    <Icon color="dark">block</Icon>&nbsp;启用
+                  </MDButton>
+                )}
+                {row.original.state !== 1 && (
+                  <MDButton variant="outlined" color="dark" size="small">
+                    <Icon color="info">check</Icon>&nbsp;禁用
+                  </MDButton>
+                )}
               </MDBox>
             </Grid>
           </Grid>

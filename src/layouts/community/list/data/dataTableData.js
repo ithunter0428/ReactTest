@@ -22,8 +22,10 @@ import IdCell from "layouts/community/list/components/IdCell";
 import DefaultCell from "layouts/community/list/components/DefaultCell";
 
 import Grid from "@mui/material/Grid";
+import Icon from "@mui/material/Icon";
 
 import MDBox from "components/MDBox";
+import MDAvatar from "components/MDAvatar";
 import MDButton from "components/MDButton";
 
 const dataTableData = {
@@ -38,9 +40,7 @@ const dataTableData = {
       Header: "图标",
       accessor: "img_url",
       width: "20%",
-      Cell: ({ value }) => (
-        <MDBox component="img" src={value} alt="Product Image" shadow="lg" width="30px" />
-      ),
+      Cell: ({ value }) => <MDAvatar src={value} alt="Project Image" size="sm" />,
     },
     {
       Header: "名称",
@@ -64,13 +64,13 @@ const dataTableData = {
       Header: "",
       accessor: "action",
       width: "20%",
-      Cell: () => (
+      Cell: ({ row }) => (
         <MDBox mt={2} style={{ width: 200 }}>
           <Grid container spacing={1}>
             <Grid item xs={12} sm={5}>
               <MDBox mb={1}>
-                <Link to="/community/details">
-                  <MDButton variant="outlined" color="dark">
+                <Link to={`/community/details?id=${row.original.community_id}`}>
+                  <MDButton variant="outlined" color="dark" size="small">
                     详情
                   </MDButton>
                 </Link>
@@ -78,9 +78,16 @@ const dataTableData = {
             </Grid>
             <Grid item xs={12} sm={7}>
               <MDBox mb={1}>
-                <MDButton variant="outlined" color="dark">
-                  启用|禁用
-                </MDButton>
+                {row.original.state === 1 && (
+                  <MDButton variant="outlined" color="dark" size="small">
+                    <Icon color="dark">block</Icon>&nbsp;启用
+                  </MDButton>
+                )}
+                {row.original.state !== 1 && (
+                  <MDButton variant="outlined" color="dark" size="small">
+                    <Icon color="info">check</Icon>&nbsp;禁用
+                  </MDButton>
+                )}
               </MDBox>
             </Grid>
           </Grid>

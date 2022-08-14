@@ -24,6 +24,7 @@ import DefaultCell from "layouts/appuser/list/components/DefaultCell";
 import StatusCell from "layouts/appuser/list/components/StatusCell";
 
 import Grid from "@mui/material/Grid";
+import Icon from "@mui/material/Icon";
 
 import MDBox from "components/MDBox";
 import MDButton from "components/MDButton";
@@ -61,9 +62,9 @@ const dataTableData = {
       Cell: (props) => {
         let status;
         if (props.value === 1) {
-          status = <StatusCell icon="done" color="success" status="Perfect" />;
+          status = <StatusCell icon="done" color="success" status="是" />;
         } else {
-          status = <StatusCell icon="close" color="error" status="Not" />;
+          status = <StatusCell icon="close" color="error" status="否" />;
         }
 
         return status;
@@ -74,11 +75,10 @@ const dataTableData = {
       accessor: "state",
       Cell: ({ value }) => {
         let status;
-        console.log(value);
         if (value === 1) {
-          status = <StatusCell icon="done" color="success" status="Unblocked" />;
+          status = <StatusCell icon="done" color="success" status="正常" />;
         } else {
-          status = <StatusCell icon="close" color="error" status="Blocked" />;
+          status = <StatusCell icon="close" color="error" status="已禁用" />;
         }
 
         return status;
@@ -92,28 +92,28 @@ const dataTableData = {
     {
       Header: "",
       accessor: "action",
-      Cell: ({ value }) => (
-        <MDBox mt={2}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} sm={6}>
+      Cell: ({ row }) => (
+        <MDBox mt={2} style={{ width: 200 }}>
+          <Grid container spacing={1}>
+            <Grid item xs={12} sm={5}>
               <MDBox mb={1}>
-                <Link to="/user/details">
-                  <MDButton variant="outlined" color="dark">
+                <Link to={`/user/details?id=${row.original.app_user_id}`}>
+                  <MDButton variant="outlined" color="dark" size="small">
                     详情
                   </MDButton>
                 </Link>
               </MDBox>
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={7}>
               <MDBox mb={1}>
-                {value === 1 && (
-                  <MDButton variant="outlined" color="dark">
-                    用
+                {row.original.state === 1 && (
+                  <MDButton variant="outlined" color="dark" size="small">
+                    <Icon color="dark">block</Icon>&nbsp;启用
                   </MDButton>
                 )}
-                {value !== 1 && (
-                  <MDButton variant="outlined" color="dark">
-                    禁用
+                {row.original.state !== 1 && (
+                  <MDButton variant="outlined" color="dark" size="small">
+                    <Icon color="info">check</Icon>&nbsp;禁用
                   </MDButton>
                 )}
               </MDBox>

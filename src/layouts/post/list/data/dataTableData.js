@@ -23,9 +23,12 @@ import DefaultCell from "layouts/post/list/components/DefaultCell";
 import StatusCell from "layouts/post/list/components/StatusCell";
 
 import Grid from "@mui/material/Grid";
+import Icon from "@mui/material/Icon";
 
 import MDBox from "components/MDBox";
 import MDButton from "components/MDButton";
+
+const postTypes = ["", "日常", "招募", "看法", "活动", "项目", "转发"];
 
 const dataTableData = {
   columns: [
@@ -39,7 +42,7 @@ const dataTableData = {
       Header: "类型",
       accessor: "type",
       width: "15%",
-      Cell: ({ value }) => <DefaultCell value={value} />,
+      Cell: ({ value }) => <DefaultCell value={postTypes[value]} />,
     },
     {
       Header: "内容",
@@ -61,9 +64,9 @@ const dataTableData = {
         let status;
 
         if (value === 1) {
-          status = <StatusCell icon="done" color="success" status="Normal" />;
+          status = <StatusCell icon="done" color="success" status="正常" />;
         } else {
-          status = <StatusCell icon="close" color="error" status="Blocked" />;
+          status = <StatusCell icon="close" color="error" status="已禁用" />;
         }
 
         return status;
@@ -79,13 +82,13 @@ const dataTableData = {
       Header: "",
       accessor: "action",
       width: "15%",
-      Cell: () => (
+      Cell: ({ row }) => (
         <MDBox mt={2} style={{ width: 220 }}>
           <Grid container spacing={1}>
             <Grid item xs={12} sm={5}>
               <MDBox mb={1}>
-                <Link to="/post/details">
-                  <MDButton variant="outlined" color="dark">
+                <Link to={`/post/details?id=${row.original.post_id}`}>
+                  <MDButton variant="outlined" color="dark" size="small">
                     详情
                   </MDButton>
                 </Link>
@@ -93,9 +96,16 @@ const dataTableData = {
             </Grid>
             <Grid item xs={12} sm={7}>
               <MDBox mb={1}>
-                <MDButton variant="outlined" color="dark">
-                  启用|禁用
-                </MDButton>
+                {row.original.state === 1 && (
+                  <MDButton variant="outlined" color="dark" size="small">
+                    <Icon color="dark">block</Icon>&nbsp;启用
+                  </MDButton>
+                )}
+                {row.original.state !== 1 && (
+                  <MDButton variant="outlined" color="dark" size="small">
+                    <Icon color="info">check</Icon>&nbsp;禁用
+                  </MDButton>
+                )}
               </MDBox>
             </Grid>
           </Grid>
