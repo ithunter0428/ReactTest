@@ -50,12 +50,12 @@ function SchoolForm() {
                     <Grid container spaing={2} mt={2} mb={3}>
                       <Grid item>
                         <MDTypography variant="h6" fontWeight="regular" color="text">
-                          用户名:&nbsp;&nbsp;&nbsp;
+                          学校ID:&nbsp;&nbsp;&nbsp;
                         </MDTypography>
                       </Grid>
                       <Grid item sm={8}>
                         <MDTypography variant="h6" fontWeight="medium" color="text">
-                          Chris
+                          1
                         </MDTypography>
                       </Grid>
                     </Grid>
@@ -66,7 +66,7 @@ function SchoolForm() {
                     <Grid container spaing={2}>
                       <Grid item>
                         <MDTypography variant="h6" fontWeight="regular" color="text">
-                          头像:&nbsp;&nbsp;&nbsp;
+                          图标:&nbsp;&nbsp;&nbsp;
                         </MDTypography>
                       </Grid>
                       <Grid item sm={3}>
@@ -82,14 +82,14 @@ function SchoolForm() {
                   </MDBox>
                   {/*  */}
                   <MDBox mb={2}>
-                    <MDInput type="text" label="用户名" fullWidth />
+                    <MDInput type="text" label="中文名称" fullWidth />
                   </MDBox>
                   <MDBox mb={2}>
-                    <MDInput type="password" label="登陆密码" fullWidth />
+                    <MDInput type="text" label="英文名称" fullWidth />
                   </MDBox>
                   <MDBox mt={4} mb={1}>
                     <MDButton variant="gradient" color="info" fullWidth>
-                      新建
+                      保存
                     </MDButton>
                   </MDBox>
                 </MDBox>

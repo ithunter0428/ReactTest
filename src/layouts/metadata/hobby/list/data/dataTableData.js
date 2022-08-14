@@ -20,7 +20,7 @@ import { Link } from "react-router-dom";
 
 import IdCell from "layouts/metadata/hobby/list/components/IdCell";
 import DefaultCell from "layouts/metadata/hobby/list/components/DefaultCell";
-import StatusCell from "layouts/metadata/hobby/list/components/StatusCell";
+import CustomerCell from "layouts/metadata/hobby/list/components/CustomerCell";
 
 import Grid from "@mui/material/Grid";
 
@@ -29,76 +29,40 @@ import MDButton from "components/MDButton";
 
 const dataTableData = {
   columns: [
-    { Header: "用户ID", accessor: "id", Cell: ({ value }) => <IdCell id={value} /> },
     {
-      Header: "手机号",
-      accessor: "phone",
-      Cell: ({ value }) => <DefaultCell value={value} />,
+      Header: "爱好ID",
+      accessor: "hobby_id",
+      Cell: ({ value }) => <IdCell id={value.toString()} />,
     },
     {
-      Header: "姓名",
+      Header: "图标",
+      accessor: "img_url",
+      Cell: ({ value }) => <CustomerCell image={value} name="" />,
+    },
+    {
+      Header: "中文名称",
       accessor: "name",
       Cell: ({ value }) => <DefaultCell value={value} />,
     },
     {
-      Header: "学生卡验证状态",
-      accessor: "verified_status",
-      Cell: ({ value }) => {
-        let status;
-
-        if (value === "verified") {
-          status = <StatusCell icon="done" color="success" status="Verified" />;
-        } else {
-          status = <StatusCell icon="close" color="error" status="Unverified" />;
-        }
-
-        return status;
-      },
+      Header: "英文名称",
+      accessor: "en_name",
+      Cell: ({ value }) => <DefaultCell value={value} />,
     },
     {
-      Header: "是否完善信息",
-      accessor: "filled",
-      Cell: ({ value }) => {
-        let status;
-
-        if (value === "filled") {
-          status = <StatusCell icon="done" color="success" status="Filled" />;
-        } else {
-          status = <StatusCell icon="close" color="error" status="Not" />;
-        }
-
-        return status;
-      },
-    },
-    {
-      Header: "状态 （正常 | 已禁用）",
-      accessor: "status",
-      Cell: ({ value }) => {
-        let status;
-
-        if (value === "unblocked") {
-          status = <StatusCell icon="done" color="success" status="Unblocked" />;
-        } else {
-          status = <StatusCell icon="close" color="error" status="Blocked" />;
-        }
-
-        return status;
-      },
-    },
-    {
-      Header: "注册时间",
-      accessor: "reg_time",
+      Header: "创建人",
+      accessor: "create_user_name",
       Cell: ({ value }) => <DefaultCell value={value} />,
     },
     {
       Header: "",
       accessor: "action",
-      Cell: () => (
+      Cell: ({ row }) => (
         <MDBox mt={2}>
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
               <MDBox mb={1}>
-                <Link to="/user/details">
+                <Link to={`/metadata/hobby/addOrUpdate?id=${row.original.hobby_id}`}>
                   <MDButton variant="outlined" color="dark">
                     编辑
                   </MDButton>
@@ -120,58 +84,164 @@ const dataTableData = {
 
   rows: [
     {
-      id: "#10421",
-      phone: "156890234",
-      reg_time: "1 Nov, 10:20 AM",
-      satus: "blocked",
-      verified_status: "verified",
-      name: "Orlando Imieto",
-      filled: "filled",
+      hobby_id: 1,
+      name: "3D打印",
+      img_url: "http://oss.ban-qu.com/hobby/flaticon%203D%20printing%20logo.png",
+      en_name: "3D printing",
+      create_user_id: 0,
+      create_user_name: "系统创建",
     },
     {
-      id: "#10421",
-      phone: "156890234",
-      reg_time: "1 Nov, 10:20 AM",
-      satus: "blocked",
-      verified_status: "verified",
-      name: "Orlando Imieto",
-      filled: "filled",
+      hobby_id: 2,
+      name: "杂技瑜伽",
+      img_url: "http://oss.ban-qu.com/hobby/flaticon%20Acro%20yoga%20logo.png",
+      en_name: "Acro yoga",
+      create_user_id: 0,
+      create_user_name: "系统创建",
     },
     {
-      id: "#10421",
-      phone: "156890234",
-      reg_time: "1 Nov, 10:20 AM",
-      satus: "blocked",
-      verified_status: "verified",
-      name: "Orlando Imieto",
-      filled: "filled",
+      hobby_id: 3,
+      name: "演戏",
+      img_url: "http://oss.ban-qu.com/hobby/flaticon%20Acting%20logo.png",
+      en_name: "Acting",
+      create_user_id: 0,
+      create_user_name: "系统创建",
     },
     {
-      id: "#10421",
-      phone: "156890234",
-      reg_time: "1 Nov, 10:20 AM",
-      satus: "blocked",
-      verified_status: "verified",
-      name: "Orlando Imieto",
-      filled: "filled",
+      hobby_id: 4,
+      name: "可动人偶",
+      img_url: "http://oss.ban-qu.com/hobby/flaticon%20Action%20figure%20logo.png",
+      en_name: "Action figure",
+      create_user_id: 0,
+      create_user_name: "系统创建",
     },
     {
-      id: "#10421",
-      phone: "156890234",
-      reg_time: "1 Nov, 10:20 AM",
-      satus: "blocked",
-      verified_status: "verified",
-      name: "Orlando Imieto",
-      filled: "filled",
+      hobby_id: 5,
+      name: "航天",
+      img_url: "http://oss.ban-qu.com/hobby/flaticon%20Aerospace%20logo.png",
+      en_name: "Aerospace",
+      create_user_id: 0,
+      create_user_name: "系统创建",
     },
     {
-      id: "#10421",
-      phone: "156890234",
-      reg_time: "1 Nov, 10:20 AM",
-      satus: "blocked",
-      verified_status: "verified",
-      name: "Orlando Imieto",
-      filled: "filled",
+      hobby_id: 6,
+      name: "合气道",
+      img_url: "http://oss.ban-qu.com/hobby/flaticon%20Aikido%20logo.png",
+      en_name: "Aikido",
+      create_user_id: 0,
+      create_user_name: "系统创建",
+    },
+    {
+      hobby_id: 7,
+      name: "空中运动",
+      img_url: "http://oss.ban-qu.com/hobby/flaticon%20Air%20sports%20logo.png",
+      en_name: "Air sports",
+      create_user_id: 0,
+      create_user_name: "系统创建",
+    },
+    {
+      hobby_id: 8,
+      name: "飞机定位",
+      img_url: "http://oss.ban-qu.com/hobby/flaticon%20Aircraft%20spotting%20logo.png",
+      en_name: "Aircraft spotting",
+      create_user_id: 0,
+      create_user_name: "系统创建",
+    },
+    {
+      hobby_id: 9,
+      name: "气枪",
+      img_url: "http://oss.ban-qu.com/hobby/flaticon%20Airsoft%20logo.png",
+      en_name: "Airsoft",
+      create_user_id: 0,
+      create_user_name: "系统创建",
+    },
+    {
+      hobby_id: 10,
+      name: "业余天文学",
+      img_url: "http://oss.ban-qu.com/hobby/flaticon%20Amateur%20astronomy%20logo.png",
+      en_name: "Amateur astronomy",
+      create_user_id: 0,
+      create_user_name: "系统创建",
+    },
+    {
+      hobby_id: 11,
+      name: "游乐园参观",
+      img_url: "http://oss.ban-qu.com/hobby/flaticon%20Amusement%20park%20visiting%20logo.png",
+      en_name: "Amusement park visiting",
+      create_user_id: 0,
+      create_user_name: "系统创建",
+    },
+    {
+      hobby_id: 12,
+      name: "动画片",
+      img_url: "http://oss.ban-qu.com/hobby/flaticon%20Animation%20logo.png",
+      en_name: "Animation",
+      create_user_id: 0,
+      create_user_name: "系统创建",
+    },
+    {
+      hobby_id: 13,
+      name: "蚂蚁饲养",
+      img_url: "http://oss.ban-qu.com/hobby/flaticon%20Ant-keeping%20logo.png",
+      en_name: "Ant-keeping",
+      create_user_id: 0,
+      create_user_name: "系统创建",
+    },
+    {
+      hobby_id: 14,
+      name: "仿古",
+      img_url: "http://oss.ban-qu.com/hobby/flaticon%20Antiquing%20logo.png",
+      en_name: "Antiquing",
+      create_user_id: 0,
+      create_user_name: "系统创建",
+    },
+    {
+      hobby_id: 15,
+      name: "古物",
+      img_url: "http://oss.ban-qu.com/hobby/flaticon%20Antiquities%20logo.png",
+      en_name: "Antiquities",
+      create_user_id: 0,
+      create_user_name: "系统创建",
+    },
+    {
+      hobby_id: 16,
+      name: "水族造景",
+      img_url: "http://oss.ban-qu.com/hobby/flaticon%20Aqua%20scaping%20logo.png",
+      en_name: "Aqua scaping",
+      create_user_id: 0,
+      create_user_name: "系统创建",
+    },
+    {
+      hobby_id: 17,
+      name: "考古学",
+      img_url: "http://oss.ban-qu.com/hobby/flaticon%20Archaeology%20logo.png",
+      en_name: "Archaeology",
+      create_user_id: 0,
+      create_user_name: "系统创建",
+    },
+    {
+      hobby_id: 18,
+      name: "射箭",
+      img_url: "http://oss.ban-qu.com/hobby/flaticon%20Archery%20logo.png",
+      en_name: "Archery",
+      create_user_id: 0,
+      create_user_name: "系统创建",
+    },
+    {
+      hobby_id: 19,
+      name: "艺术收藏",
+      img_url: "http://oss.ban-qu.com/hobby/flaticon%20Art%20collecting%20logo.png",
+      en_name: "Art collecting",
+      create_user_id: 0,
+      create_user_name: "系统创建",
+    },
+    {
+      hobby_id: 20,
+      name: "艺术",
+      img_url: "http://oss.ban-qu.com/hobby/flaticon%20Art%20logo.png",
+      en_name: "Art",
+      create_user_id: 0,
+      create_user_name: "系统创建",
     },
   ],
 };
