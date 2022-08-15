@@ -66,7 +66,7 @@ function UserList() {
                   <Grid item xs={12} sm={2} ml={3} sx={{ mt: 1 }}>
                     <Autocomplete
                       defaultValue="全部"
-                      options={["全部"]}
+                      options={["全部", "日常", "招募", "看法", "活动", "项目", "转发"]}
                       renderInput={(params) => <MDInput {...params} variant="standard" />}
                     />
                   </Grid>

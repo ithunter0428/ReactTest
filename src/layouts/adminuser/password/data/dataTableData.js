@@ -23,7 +23,6 @@ import DefaultCell from "layouts/appuser/details/components/DefaultCell";
 import StatusCell from "layouts/appuser/details/components/StatusCell";
 
 import Grid from "@mui/material/Grid";
-import Icon from "@mui/material/Icon";
 
 import MDBox from "components/MDBox";
 import MDButton from "components/MDButton";
@@ -74,9 +73,10 @@ const dataTableData = {
     {
       Header: "Status",
       accessor: "status",
-      Cell: (props) => {
+      Cell: ({ value }) => {
         let status;
-        if (props.value === "unblocked") {
+
+        if (value === "unblocked") {
           status = <StatusCell icon="done" color="success" status="Unblocked" />;
         } else {
           status = <StatusCell icon="close" color="error" status="Blocked" />;

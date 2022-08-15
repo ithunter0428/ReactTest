@@ -156,7 +156,7 @@ export default function App() {
             <Sidenav
               color={sidenavColor}
               brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
-              brandName="BanQu Dashboard"
+              brandName="半区管理"
               routes={routes}
               onMouseEnter={handleOnMouseEnter}
               onMouseLeave={handleOnMouseLeave}
@@ -181,7 +181,7 @@ export default function App() {
           <Sidenav
             color={sidenavColor}
             brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
-            brandName="BanQu Dashboard"
+            brandName="半区管理"
             routes={routes}
             onMouseEnter={handleOnMouseEnter}
             onMouseLeave={handleOnMouseLeave}

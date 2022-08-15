@@ -36,26 +36,39 @@ import BasicLayout from "layouts/authentication/components/BasicLayout";
 import bgImage from "assets/images/bg-sign-in-basic.jpeg";
 
 // BASE_URL
-// import BASE_URL from "service";
+import BASE_URL from "service";
 
-// import axios from "axios";
+import axios from "axios";
 
 function Basic() {
   const [rememberMe, setRememberMe] = useState(false);
+  // const [username, setUserName] = useState("");
+  // const [password, setPassword] = useState("");
+  const [msg, setMsg] = useState("");
 
   const navigate = useNavigate();
 
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
 
   const handleSignIn = async () => {
-    // const { data } = await axios.post(`${BASE_URL}/api/tools_user/login`, {
-    //   headers: {
-    //     "Access-Control-Allow-Origin": "*",
-    //     "Content-Type": "application/json",
-    //   },
-    // });
-    // console.log(data);
-    navigate("/mainpage");
+    const { data } = await axios.post(
+      `${BASE_URL}/api/tools_user/login`,
+      { username: "sugar2", pwd: "00000s0" },
+      {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    // Login Succes
+    if (data.res_code === 1) {
+      navigate("/mainpage");
+    }
+    // Login Failed
+    else {
+      setMsg(data.msg);
+    }
   };
   return (
     <BasicLayout image={bgImage}>
@@ -83,6 +96,11 @@ function Basic() {
                 &nbsp;&nbsp;记住密码
               </MDTypography>
             </MDBox>
+            {msg !== "" && (
+              <MDTypography color="primary" size="small" fontWeight="regular">
+                {msg}
+              </MDTypography>
+            )}
             <MDBox mt={4} mb={1}>
               <MDButton variant="gradient" color="info" onClick={handleSignIn} fullWidth>
                 sign in

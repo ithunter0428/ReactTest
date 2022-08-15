@@ -16,8 +16,6 @@ Coded by www.creative-tim.com
 // @mui material components
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
-import Autocomplete from "@mui/material/Autocomplete";
-
 // Material Dashboard 2 PRO React components
 import MDBox from "components/MDBox";
 import MDInput from "components/MDInput";
@@ -53,14 +51,6 @@ function StudneCardList() {
                         fullWidth
                       />
                     </MDBox>
-                  </Grid>
-                  {/* Filter */}
-                  <Grid item xs={12} sm={2} ml={3} sx={{ mt: 1 }}>
-                    <Autocomplete
-                      defaultValue="全部"
-                      options={["全部"]}
-                      renderInput={(params) => <MDInput {...params} variant="standard" />}
-                    />
                   </Grid>
                   {/* Search Button */}
                   <Grid item xs={12} sm={5} ml={3}>

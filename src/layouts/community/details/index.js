@@ -14,6 +14,7 @@ Coded by www.creative-tim.com
 */
 
 import { useNavigate } from "react-router-dom";
+import moment from "moment";
 // @mui material components
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
@@ -31,11 +32,18 @@ import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 
 import UserTable from "layouts/community/details/table";
-import profilePicture from "assets/images/team-3.jpg";
 
 function CommunityDetails() {
   const navigate = useNavigate();
-
+  const community = {
+    community_id: 10,
+    name: "苏测3",
+    description: "--------",
+    img_url: "",
+    state: 1,
+    create_time: "2022-07-20T07:07:03.000Z",
+    creator: "苏玉博",
+  };
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -59,7 +67,7 @@ function CommunityDetails() {
                   </Grid>
                   <Grid item sm={3}>
                     <MDTypography variant="caption" fontWeight="medium">
-                      1
+                      {community.community_id}
                     </MDTypography>
                   </Grid>
                 </Grid>
@@ -76,7 +84,7 @@ function CommunityDetails() {
                       <Grid item sm={3}>
                         <MDBox
                           component="img"
-                          src={profilePicture}
+                          src={community.img_url}
                           alt="Product Image"
                           shadow="lg"
                           width="100%"
@@ -98,7 +106,7 @@ function CommunityDetails() {
                       </Grid>
                       <Grid item sm={9}>
                         <MDTypography variant="caption" fontWeight="medium" color="text">
-                          认证失败 | 未认证 | 认证中
+                          {community.name}
                         </MDTypography>
                       </Grid>
                     </Grid>
@@ -111,7 +119,8 @@ function CommunityDetails() {
                       </Grid>
                       <Grid item sm={9}>
                         <MDTypography variant="caption" fontWeight="medium" color="text">
-                          是 | 否
+                          {community.state === 1 && "Normal"}
+                          {community.state === -1 && "Blocked"}
                         </MDTypography>
                       </Grid>
                     </Grid>
@@ -127,7 +136,7 @@ function CommunityDetails() {
                       </Grid>
                       <Grid item sm={9}>
                         <MDTypography variant="caption" fontWeight="medium" color="text">
-                          认证失败 | 未认证 | 认证中
+                          {community.description}
                         </MDTypography>
                       </Grid>
                     </Grid>
@@ -140,7 +149,7 @@ function CommunityDetails() {
                       </Grid>
                       <Grid item sm={9}>
                         <MDTypography variant="caption" fontWeight="medium" color="text">
-                          是 | 否
+                          {community.creator}
                         </MDTypography>
                       </Grid>
                     </Grid>
@@ -153,7 +162,7 @@ function CommunityDetails() {
                       </Grid>
                       <Grid item sm={9}>
                         <MDTypography variant="caption" fontWeight="medium" color="text">
-                          北京
+                          {moment(community.create_time).format("YYYY-MM-DD HH:MM:SS")}
                         </MDTypography>
                       </Grid>
                     </Grid>

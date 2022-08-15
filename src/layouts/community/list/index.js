@@ -33,7 +33,7 @@ import DataTable from "examples/Tables/DataTable";
 // Data
 import dataTableData from "layouts/community/list/data/dataTableData";
 
-function UserList() {
+function CommunityList() {
   const [key, setKey] = useState("");
   // const [category, setCategory] = useState('全部')
   const handleSearch = () => {
@@ -89,4 +89,4 @@ function UserList() {
   );
 }
 
-export default UserList;
+export default CommunityList;

@@ -13,6 +13,7 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 import { useNavigate } from "react-router-dom";
+import moment from "moment";
 // @mui material components
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
@@ -27,10 +28,43 @@ import MDButton from "components/MDButton";
 // Material Dashboard 2 PRO React examples
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import profilePicture from "assets/images/team-3.jpg";
 
 function UserList() {
   const navigate = useNavigate();
+  const typeStr = ["", "日常", "招募", "看法", "活动", "项目", "转发"];
+  const post = {
+    post_id: 10,
+    type: 1,
+    content: "把家里来咯弄来咯弄就斤斤计较",
+    role_id: 1,
+    parent_id: 0,
+    state: -2,
+    create_time: "2022-07-28T15:30:01.000Z",
+    creator: "杨总",
+    community_name: "",
+    resource_arr: [
+      {
+        type: 1,
+        url: "https://banqu-v2.oss-accelerate.aliyuncs.com/banqu-android/1659022197639.jpg",
+      },
+      {
+        type: 1,
+        url: "https://banqu-v2.oss-accelerate.aliyuncs.com/banqu-android/1659022197633.jpg",
+      },
+      {
+        type: 1,
+        url: "https://banqu-v2.oss-accelerate.aliyuncs.com/banqu-android/1659022197636.jpg",
+      },
+      {
+        type: 1,
+        url: "https://banqu-v2.oss-accelerate.aliyuncs.com/banqu-android/1659022197591.jpg",
+      },
+      {
+        type: 1,
+        url: "add",
+      },
+    ],
+  };
 
   return (
     <DashboardLayout>
@@ -55,7 +89,7 @@ function UserList() {
                   </Grid>
                   <Grid item sm={3}>
                     <MDTypography variant="caption" fontWeight="medium">
-                      1
+                      {post.post_id}
                     </MDTypography>
                   </Grid>
                 </Grid>
@@ -72,7 +106,7 @@ function UserList() {
                       </Grid>
                       <Grid item sm={9}>
                         <MDTypography variant="caption" fontWeight="medium" color="text">
-                          Chris
+                          {typeStr[post.type]}
                         </MDTypography>
                       </Grid>
                     </Grid>
@@ -85,7 +119,7 @@ function UserList() {
                       </Grid>
                       <Grid item sm={9}>
                         <MDTypography variant="caption" fontWeight="medium" color="text">
-                          Lee
+                          {post.role_id}
                         </MDTypography>
                       </Grid>
                     </Grid>
@@ -98,7 +132,7 @@ function UserList() {
                       </Grid>
                       <Grid item sm={9}>
                         <MDTypography variant="caption" fontWeight="medium" color="text">
-                          +86
+                          {post.creator}
                         </MDTypography>
                       </Grid>
                     </Grid>
@@ -115,7 +149,8 @@ function UserList() {
                       </Grid>
                       <Grid item sm={9}>
                         <MDTypography variant="caption" fontWeight="medium" color="text">
-                          认证失败 | 未认证 | 认证中
+                          {post.state === 1 && "正常"}
+                          {post.state === -1 && "已禁用"}
                         </MDTypography>
                       </Grid>
                     </Grid>
@@ -128,7 +163,7 @@ function UserList() {
                       </Grid>
                       <Grid item sm={9}>
                         <MDTypography variant="caption" fontWeight="medium" color="text">
-                          是 | 否
+                          {post.community_name}
                         </MDTypography>
                       </Grid>
                     </Grid>
@@ -141,7 +176,7 @@ function UserList() {
                       </Grid>
                       <Grid item sm={9}>
                         <MDTypography variant="caption" fontWeight="medium" color="text">
-                          北京
+                          {moment(post.create_time).format("YYYY-MM-DD")}
                         </MDTypography>
                       </Grid>
                     </Grid>
@@ -163,14 +198,14 @@ function UserList() {
                   <Grid item sm={4}>
                     {/* Name */}
                     <Grid container spaing={2} mt={2}>
-                      <Grid item sm={3}>
+                      <Grid item sm={5}>
                         <MDTypography variant="caption" fontWeight="regular" color="text">
                           转发引用帖子ID:&nbsp;&nbsp;&nbsp;
                         </MDTypography>
                       </Grid>
-                      <Grid item sm={9}>
+                      <Grid item sm={7}>
                         <MDTypography variant="caption" fontWeight="medium" color="text">
-                          Chris
+                          324
                         </MDTypography>
                       </Grid>
                     </Grid>
@@ -186,7 +221,7 @@ function UserList() {
                   </Grid>
                   <Grid item sm={9}>
                     <MDTypography variant="caption" fontWeight="medium" color="text">
-                      Chris post this article.
+                      {post.content}
                     </MDTypography>
                   </Grid>
                 </Grid>
@@ -199,33 +234,17 @@ function UserList() {
                     </MDTypography>
                   </Grid>
                   {/* Post Image */}
-                  <Grid item sm={2}>
-                    <MDBox
-                      component="img"
-                      src={profilePicture}
-                      alt="Product Image"
-                      shadow="lg"
-                      width="100%"
-                    />
-                  </Grid>
-                  <Grid item sm={2}>
-                    <MDBox
-                      component="img"
-                      src={profilePicture}
-                      alt="Product Image"
-                      shadow="lg"
-                      width="100%"
-                    />
-                  </Grid>
-                  <Grid item sm={2}>
-                    <MDBox
-                      component="img"
-                      src={profilePicture}
-                      alt="Product Image"
-                      shadow="lg"
-                      width="100%"
-                    />
-                  </Grid>
+                  {post.resource_arr.map((resource) => (
+                    <Grid item sm={2}>
+                      <MDBox
+                        component="img"
+                        src={resource.url}
+                        alt="Product Image"
+                        shadow="lg"
+                        width="100%"
+                      />
+                    </Grid>
+                  ))}
                 </Grid>
               </MDBox>
             </MDBox>

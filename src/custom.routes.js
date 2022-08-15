@@ -9,6 +9,7 @@ import SkillForm from "layouts/metadata/skill/new";
 import DegreeForm from "layouts/metadata/degree/new";
 import MajorForm from "layouts/metadata/major/new";
 import HobbyForm from "layouts/metadata/hobby/new";
+import ChangePassword from "layouts/adminuser/password";
 
 const routes = [
   // Sign IN Route
@@ -70,6 +71,12 @@ const routes = [
     route: "/metadata/hobby/addOrUpdate",
     component: <HobbyForm />,
     key: "hobby-add-update",
+  },
+  // Change Password Route
+  {
+    route: "/change_pass",
+    component: <ChangePassword />,
+    key: "change-password",
   },
 ];
 

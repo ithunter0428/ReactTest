@@ -18,7 +18,6 @@ import { Link } from "react-router-dom";
 // @mui material components
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
-// import Autocomplete from "@mui/material/Autocomplete";
 import Icon from "@mui/material/Icon";
 
 // Material Dashboard 2 PRO React components
@@ -86,14 +85,6 @@ function UserList() {
                       />
                     </MDBox>
                   </Grid>
-                  {/* Filter */}
-                  {/* <Grid item xs={12} sm={2} ml={3} sx={{ mt: 1 }}>
-                    <Autocomplete
-                      defaultValue="全部"
-                      options={["全部"]}
-                      renderInput={(params) => <MDInput {...params} variant="standard" />}
-                    />
-                  </Grid> */}
                   {/* Search Button */}
                   <Grid item xs={12} sm={5} ml={3}>
                     <MDBox mb={1}>
@@ -109,7 +100,7 @@ function UserList() {
           <Grid item xs={12} md={12} sx={{ textAlign: "right" }} mb={2} mr={2}>
             <Link to="/metadata/school/addOrUpdate">
               <MDButton variant="gradient" color="success">
-                <Icon>add</Icon>&nbsp; 新增学校
+                <Icon>add</Icon>&nbsp; 新建学校
               </MDButton>
             </Link>
           </Grid>

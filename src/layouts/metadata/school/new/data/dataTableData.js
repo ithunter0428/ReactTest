@@ -99,7 +99,7 @@ const dataTableData = {
             <Grid item xs={12} sm={4}>
               <MDBox mb={1}>
                 <Link to="/user/details">
-                  <MDButton variant="outlined" color="dark">
+                  <MDButton variant="outlined" color="dark" size="small">
                     Details
                   </MDButton>
                 </Link>
@@ -107,7 +107,7 @@ const dataTableData = {
             </Grid>
             <Grid item xs={12} sm={4} ml={3}>
               <MDBox mb={1}>
-                <MDButton variant="outlined" color="dark">
+                <MDButton variant="outlined" color="dark" size="small">
                   Block
                 </MDButton>
               </MDBox>

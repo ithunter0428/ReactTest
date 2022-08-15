@@ -23,6 +23,7 @@ import DefaultCell from "layouts/adminuser/list/components/DefaultCell";
 import StatusCell from "layouts/adminuser/list/components/StatusCell";
 
 import Grid from "@mui/material/Grid";
+import Icon from "@mui/material/Icon";
 
 import MDBox from "components/MDBox";
 import MDButton from "components/MDButton";
@@ -32,32 +33,32 @@ const dataTableData = {
     {
       Header: "后台用户",
       width: "15%",
-      accessor: "id",
+      accessor: "tools_user_id",
       Cell: ({ value }) => <IdCell id={value} />,
     },
     {
       Header: "用户名",
       width: "20%",
-      accessor: "phone",
+      accessor: "username",
       Cell: ({ value }) => <DefaultCell value={value} />,
     },
     {
       Header: "权限",
       width: "20%",
-      accessor: "name",
+      accessor: "role_id",
       Cell: ({ value }) => <DefaultCell value={value} />,
     },
     {
       Header: "状态",
       width: "20%",
-      accessor: "verified_status",
+      accessor: "state",
       Cell: ({ value }) => {
         let status;
 
-        if (value === "verified") {
-          status = <StatusCell icon="done" color="success" status="Verified" />;
+        if (value === 1) {
+          status = <StatusCell icon="done" color="success" status="正常" />;
         } else {
-          status = <StatusCell icon="close" color="error" status="Unverified" />;
+          status = <StatusCell icon="close" color="error" status="已禁用" />;
         }
 
         return status;
@@ -67,13 +68,13 @@ const dataTableData = {
       Header: "",
       accessor: "action",
       width: "25%",
-      Cell: () => (
-        <MDBox mt={2} style={{ width: 250 }}>
+      Cell: ({ row }) => (
+        <MDBox mt={2} style={{ width: 200 }}>
           <Grid container spacing={0}>
             <Grid item xs={12} sm={6}>
               <MDBox mb={1}>
                 <Link to="/user/details">
-                  <MDButton variant="outlined" color="dark">
+                  <MDButton variant="outlined" color="dark" size="small">
                     重置密码
                   </MDButton>
                 </Link>
@@ -81,9 +82,16 @@ const dataTableData = {
             </Grid>
             <Grid item xs={12} sm={6}>
               <MDBox mb={1}>
-                <MDButton variant="outlined" color="dark">
-                  启用|禁用
-                </MDButton>
+                {row.original.state === 1 && (
+                  <MDButton variant="outlined" color="dark" size="small">
+                    <Icon color="dark">block</Icon>&nbsp;禁用
+                  </MDButton>
+                )}
+                {row.original.state !== 1 && (
+                  <MDButton variant="outlined" color="dark" size="small">
+                    <Icon color="info">check</Icon>&nbsp;启用
+                  </MDButton>
+                )}
               </MDBox>
             </Grid>
           </Grid>
@@ -94,58 +102,22 @@ const dataTableData = {
 
   rows: [
     {
-      id: "#10421",
-      phone: "156890234",
-      reg_time: "1 Nov, 10:20 AM",
-      satus: "blocked",
-      verified_status: "verified",
-      name: "Orlando Imieto",
-      filled: "filled",
+      tools_user_id: 1,
+      username: "sugar",
+      role_id: 1,
+      state: 1,
     },
     {
-      id: "#10421",
-      phone: "156890234",
-      reg_time: "1 Nov, 10:20 AM",
-      satus: "blocked",
-      verified_status: "verified",
-      name: "Orlando Imieto",
-      filled: "filled",
+      tools_user_id: 2,
+      username: "sugar2",
+      role_id: 1,
+      state: 1,
     },
     {
-      id: "#10421",
-      phone: "156890234",
-      reg_time: "1 Nov, 10:20 AM",
-      satus: "blocked",
-      verified_status: "verified",
-      name: "Orlando Imieto",
-      filled: "filled",
-    },
-    {
-      id: "#10421",
-      phone: "156890234",
-      reg_time: "1 Nov, 10:20 AM",
-      satus: "blocked",
-      verified_status: "verified",
-      name: "Orlando Imieto",
-      filled: "filled",
-    },
-    {
-      id: "#10421",
-      phone: "156890234",
-      reg_time: "1 Nov, 10:20 AM",
-      satus: "blocked",
-      verified_status: "verified",
-      name: "Orlando Imieto",
-      filled: "filled",
-    },
-    {
-      id: "#10421",
-      phone: "156890234",
-      reg_time: "1 Nov, 10:20 AM",
-      satus: "blocked",
-      verified_status: "verified",
-      name: "Orlando Imieto",
-      filled: "filled",
+      tools_user_id: 3,
+      username: "sugar3",
+      role_id: 1,
+      state: 1,
     },
   ],
 };
