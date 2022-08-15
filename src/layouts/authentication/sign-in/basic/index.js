@@ -42,6 +42,8 @@ import axios from "axios";
 
 function Basic() {
   const [rememberMe, setRememberMe] = useState(false);
+  // const [username, setUserName] = useState("");
+  // const [password, setPassword] = useState("");
   const [msg, setMsg] = useState("");
 
   const navigate = useNavigate();
