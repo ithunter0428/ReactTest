@@ -25,7 +25,7 @@ import Icon from "@mui/material/Icon";
 import MDBox from "components/MDBox";
 import MDButton from "components/MDButton";
 
-const dataTableData = (data) => {
+const dataTableData = (data, changeState) => {
   const tableData = {
     columns: [
       {
@@ -58,20 +58,32 @@ const dataTableData = (data) => {
         Header: "",
         accessor: "action",
         width: "20%",
-        Cell: () => (
+        Cell: ({ row }) => (
           <MDBox mt={2} style={{ width: 200 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <MDBox mb={1}>
-                  <MDButton variant="outlined" color="dark" size="small" fullWidth>
-                    <Icon color="gray">block</Icon>&nbsp;通过
+                  <MDButton
+                    variant="outlined"
+                    color="dark"
+                    size="small"
+                    onClick={() => changeState(row.original.to_user_id, 2)}
+                    fullWidth
+                  >
+                    <Icon color="success">check</Icon>&nbsp;通过
                   </MDButton>
                 </MDBox>
               </Grid>
               <Grid item xs={12} sm={6}>
                 <MDBox mb={1}>
-                  <MDButton variant="outlined" color="dark" size="small" fullWidth>
-                    <Icon color="success">check</Icon>&nbsp;不通过
+                  <MDButton
+                    variant="outlined"
+                    color="dark"
+                    size="small"
+                    onClick={() => changeState(row.original.to_user_id, -2)}
+                    fullWidth
+                  >
+                    <Icon color="gray">block</Icon>&nbsp;不通过
                   </MDButton>
                 </MDBox>
               </Grid>

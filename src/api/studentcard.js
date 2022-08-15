@@ -16,6 +16,21 @@ export const getList = async (page, size, key) => {
   return res.data;
 };
 
+export const setState = async (id, status) => {
+  const token = localStorage.getItem("token");
+  const res = await axios.post(
+    `${BASE_URL}/api/verify_student_card/setState`,
+    { to_user_id: id, state: status },
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    }
+  );
+  return res.data;
+};
+
 export const changePwd = async (oldPass, newPass) => {
   const token = localStorage.getItem("token");
   const res = await axios.post(
