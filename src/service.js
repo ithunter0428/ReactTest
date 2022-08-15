@@ -1,2 +1,2 @@
-const BASE_URL = "http://tools.banqu.com";
+const BASE_URL = "http://tools.ban-qu.com";
 export default BASE_URL;
