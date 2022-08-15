@@ -53,7 +53,6 @@ function StudentCardList() {
 
   useEffect(() => {
     getTableData(pageNum, pageSize, key);
-    // setPageNum()
   }, [pageNum]);
 
   const handleSearch = () => {
