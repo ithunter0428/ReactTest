@@ -20,7 +20,11 @@ import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import Icon from "@mui/material/Icon";
 import Autocomplete from "@mui/material/Autocomplete";
-
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 // Material Dashboard 2 PRO React components
 import MDBox from "components/MDBox";
 import MDInput from "components/MDInput";
@@ -35,7 +39,8 @@ import DataTable from "examples/Tables/DataTable";
 // Data
 import dataTableData from "layouts/adminuser/list/data/dataTableData";
 // API
-import { getList } from "api/tooluser";
+import { getList, setState, resetPwd } from "api/tooluser";
+import { BLOCKED_SUCCESS, UNBLOCKED_SUCCESS, PASSWORD_RESETED } from "constant";
 
 function UserList() {
   const [key, setKey] = useState("");
@@ -44,6 +49,39 @@ function UserList() {
   const [pageSize, setPageSize] = useState(10);
   const [totalCount, setTotalCount] = useState(0);
   const [status, setStatus] = useState(0);
+  const [open, setOpen] = useState(false);
+  const [msg, setMsg] = useState("");
+  // Dialog
+  const handleClose = () => {
+    setOpen(false);
+  };
+  // Update state so it will change UI
+  const updateData = (id, state) => {
+    const user = data.filter((item) => item.tools_user_id === id)[0];
+    // find user in array and change its state.
+    const userList = data;
+    const index = userList.indexOf(user);
+    userList[index].state = state;
+    setData(userList);
+  };
+  // Call API for Block
+  const handleState = async (id, state) => {
+    const res = await setState(id, state);
+    if (res.res_code === 1) {
+      if (state === 1) setMsg(UNBLOCKED_SUCCESS);
+      else setMsg(BLOCKED_SUCCESS);
+      setOpen(true);
+      updateData(id, state);
+    }
+  };
+  // Call API for reset password.
+  const handlePwd = async (id) => {
+    const res = await resetPwd(id);
+    if (res.res_code === 1) {
+      setMsg(PASSWORD_RESETED);
+      setOpen(true);
+    }
+  };
   // Load Data
   const getTableData = async (pageN, pageS, k, stat) => {
     const res = await getList(pageN, pageS, k, stat);
@@ -132,12 +170,26 @@ function UserList() {
             </Link>
           </Grid>
           <DataTable
-            table={dataTableData(data)}
+            table={dataTableData(data, handleState, handlePwd)}
             activePage={pageNum}
             totalCount={totalCount}
             onPageChange={handlePageChange}
             onPageSizeChange={handlePageSizeChange}
           />
+          <Dialog
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">Success</DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">{msg}</DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <MDButton onClick={handleClose}>OK</MDButton>
+            </DialogActions>
+          </Dialog>
         </Card>
       </MDBox>
     </DashboardLayout>

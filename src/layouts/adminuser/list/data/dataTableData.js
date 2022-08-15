@@ -16,8 +16,6 @@ Coded by www.creative-tim.com
 /* eslint-disable react/prop-types */
 // ProductsList page components
 
-import { Link } from "react-router-dom";
-
 import IdCell from "layouts/adminuser/list/components/IdCell";
 import DefaultCell from "layouts/adminuser/list/components/DefaultCell";
 import StatusCell from "layouts/adminuser/list/components/StatusCell";
@@ -28,7 +26,7 @@ import Icon from "@mui/material/Icon";
 import MDBox from "components/MDBox";
 import MDButton from "components/MDButton";
 
-const dataTableData = (data) => {
+const dataTableData = (data, handleState, handlePwd) => {
   const tableData = {
     columns: [
       {
@@ -61,7 +59,6 @@ const dataTableData = (data) => {
           } else {
             status = <StatusCell icon="close" color="error" status="已禁用" />;
           }
-
           return status;
         },
       },
@@ -74,22 +71,35 @@ const dataTableData = (data) => {
             <Grid container spacing={0}>
               <Grid item xs={12} sm={6}>
                 <MDBox mb={1}>
-                  <Link to="/change_pass">
-                    <MDButton variant="outlined" color="dark" size="small">
-                      重置密码
-                    </MDButton>
-                  </Link>
+                  <MDButton
+                    variant="outlined"
+                    color="dark"
+                    size="small"
+                    onClick={() => handlePwd(row.original.tools_user_id)}
+                  >
+                    重置密码
+                  </MDButton>
                 </MDBox>
               </Grid>
               <Grid item xs={12} sm={6}>
                 <MDBox mb={1}>
                   {row.original.state === 1 && (
-                    <MDButton variant="outlined" color="dark" size="small">
+                    <MDButton
+                      variant="outlined"
+                      color="dark"
+                      size="small"
+                      onClick={() => handleState(row.original.tools_user_id, -1)}
+                    >
                       <Icon color="dark">block</Icon>&nbsp;禁用
                     </MDButton>
                   )}
                   {row.original.state !== 1 && (
-                    <MDButton variant="outlined" color="dark" size="small">
+                    <MDButton
+                      variant="outlined"
+                      color="dark"
+                      size="small"
+                      onClick={() => handleState(row.original.tools_user_id, 1)}
+                    >
                       <Icon color="info">check</Icon>&nbsp;启用
                     </MDButton>
                   )}

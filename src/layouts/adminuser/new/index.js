@@ -13,15 +13,21 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 // @mui material components
 // import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
-// import Autocomplete from "@mui/material/Autocomplete";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 
 // Material Dashboard 2 PRO React components
 import MDBox from "components/MDBox";
-// import MDTypography from "components/MDTypography";
+import MDTypography from "components/MDTypography";
 import MDInput from "components/MDInput";
 import MDButton from "components/MDButton";
 import MDBadge from "components/MDBadge";
@@ -29,8 +35,31 @@ import MDBadge from "components/MDBadge";
 // Material Dashboard 2 PRO React examples
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
+import { addUser } from "api/tooluser";
 
 function UserForm() {
+  const [msg, setMsg] = useState("");
+  const [userid, setUserId] = useState("");
+  const [password, setPassWord] = useState("");
+  const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleSubmit = async () => {
+    const data = await addUser(userid, password);
+    // Login Succes
+    if (data.res_code === 1) {
+      setOpen(true);
+    }
+    // Login Failed
+    else {
+      setMsg(data.msg);
+    }
+  };
+  // Dialog
+  const handleDelete = () => {
+    setOpen(false);
+    navigate(-1);
+  };
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -41,19 +70,51 @@ function UserForm() {
               <MDBox pt={4} pb={3} px={3}>
                 <MDBox component="form" role="form">
                   <MDBox mb={2} textAlign="center">
-                    <MDBadge color="info">新建</MDBadge>
+                    <MDBadge color="info">半区管理后台</MDBadge>
                   </MDBox>
                   <MDBox mb={2}>
-                    <MDInput type="text" label="用户名" fullWidth />
+                    <MDInput
+                      type="text"
+                      label="用户名"
+                      text={userid}
+                      onChange={(e) => setUserId(e.target.value)}
+                      fullWidth
+                    />
                   </MDBox>
                   <MDBox mb={2}>
-                    <MDInput type="password" label="登陆密码" fullWidth />
+                    <MDInput
+                      type="password"
+                      label="登陆密码"
+                      text={password}
+                      onChange={(e) => setPassWord(e.target.value)}
+                      fullWidth
+                    />
                   </MDBox>
+                  {msg !== "" && (
+                    <MDTypography color="primary" size="small" fontWeight="regular">
+                      {msg}
+                    </MDTypography>
+                  )}
                   <MDBox mt={4} mb={1}>
-                    <MDButton variant="gradient" color="info" fullWidth>
-                      新建
+                    <MDButton variant="gradient" color="info" onClick={handleSubmit} fullWidth>
+                      Create
                     </MDButton>
                   </MDBox>
+                  <Dialog
+                    open={open}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                  >
+                    <DialogTitle id="alert-dialog-title">Success</DialogTitle>
+                    <DialogContent>
+                      <DialogContentText id="alert-dialog-description">
+                        You create user successfully.
+                      </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                      <MDButton onClick={handleDelete}>OK</MDButton>
+                    </DialogActions>
+                  </Dialog>
                 </MDBox>
               </MDBox>
             </Card>

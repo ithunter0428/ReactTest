@@ -28,7 +28,7 @@ import MDBox from "components/MDBox";
 import MDAvatar from "components/MDAvatar";
 import MDButton from "components/MDButton";
 
-const dataTableData = (data) => {
+const dataTableData = (data, handleState) => {
   const tableData = {
     columns: [
       {
@@ -80,12 +80,22 @@ const dataTableData = (data) => {
               <Grid item xs={12} sm={7}>
                 <MDBox mb={1}>
                   {row.original.state === 1 && (
-                    <MDButton variant="outlined" color="dark" size="small">
+                    <MDButton
+                      variant="outlined"
+                      color="dark"
+                      size="small"
+                      onClick={() => handleState(row.original.community_id, -1)}
+                    >
                       <Icon color="dark">block</Icon>&nbsp;禁用
                     </MDButton>
                   )}
                   {row.original.state !== 1 && (
-                    <MDButton variant="outlined" color="dark" size="small">
+                    <MDButton
+                      variant="outlined"
+                      color="dark"
+                      size="small"
+                      onClick={() => handleState(row.original.community_id, 1)}
+                    >
                       <Icon color="info">check</Icon>&nbsp;启用
                     </MDButton>
                   )}

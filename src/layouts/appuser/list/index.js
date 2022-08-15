@@ -18,7 +18,11 @@ import { useState, useEffect } from "react";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import Autocomplete from "@mui/material/Autocomplete";
-
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 // Material Dashboard 2 PRO React components
 import MDBox from "components/MDBox";
 import MDInput from "components/MDInput";
@@ -32,7 +36,8 @@ import DataTable from "examples/Tables/DataTable";
 
 // Data
 import dataTableData from "layouts/appuser/list/data/dataTableData";
-import { getList } from "api/appuser";
+import { getList, setState } from "api/appuser";
+import { BLOCKED_SUCCESS, UNBLOCKED_SUCCESS } from "constant";
 
 function UserList() {
   const [key, setKey] = useState("");
@@ -41,6 +46,32 @@ function UserList() {
   const [pageSize, setPageSize] = useState(10);
   const [totalCount, setTotalCount] = useState(0);
   const [status, setStatus] = useState(0);
+  const [open, setOpen] = useState(false);
+  const [msg, setMsg] = useState("");
+  // Dialog
+  const handleClose = () => {
+    setOpen(false);
+  };
+  // Update state so it will change UI
+  const updateData = (id, state) => {
+    const user = data.filter((item) => item.app_user_id === id)[0];
+    // find user in array and change its state.
+    const userList = data;
+    const index = userList.indexOf(user);
+    userList[index].state = state;
+    setData(userList);
+  };
+  // Call API for Block
+  const handleState = async (id, state) => {
+    const res = await setState(id, state);
+    if (res.res_code === 1) {
+      if (state === 1) setMsg(UNBLOCKED_SUCCESS);
+      else setMsg(BLOCKED_SUCCESS);
+      setOpen(true);
+      updateData(id, state);
+    }
+  };
+
   // Load Data
   const getTableData = async (pageN, pageS, k, stat) => {
     const res = await getList(pageN, pageS, k, stat);
@@ -122,12 +153,26 @@ function UserList() {
             </MDBox>
           </MDBox>
           <DataTable
-            table={dataTableData(data)}
+            table={dataTableData(data, handleState)}
             activePage={pageNum}
             totalCount={totalCount}
             onPageChange={handlePageChange}
             onPageSizeChange={handlePageSizeChange}
           />
+          <Dialog
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">Success</DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">{msg}</DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <MDButton onClick={handleClose}>OK</MDButton>
+            </DialogActions>
+          </Dialog>
         </Card>
       </MDBox>
     </DashboardLayout>

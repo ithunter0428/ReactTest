@@ -122,7 +122,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
               <MDTypography variant="caption" fontWeight="regular" color="text">
                 当前用户:&nbsp;&nbsp;&nbsp;
                 <MDTypography variant="caption" fontWeight="medium" textTransform="capitalize">
-                  Chris Lee
+                  {localStorage.getItem("username")}
                 </MDTypography>
               </MDTypography>
             </MDBox>

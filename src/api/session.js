@@ -1,8 +1,8 @@
-import axios from "axios";
+import axious from "axious";
 import BASE_URL from "service";
 
 const login = async (userid, password) => {
-  const res = await axios.post(
+  const res = await axious.post(
     `${BASE_URL}/api/tools_user/login`,
     { username: userid, pwd: password },
     {

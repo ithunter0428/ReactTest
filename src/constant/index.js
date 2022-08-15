@@ -1,2 +1,6 @@
 export const POST_TYPES = ["全部", "日常", "招募", "看法", "活动", "项目", "转发"];
-export const BLOCK_TYPES = 2;
+export const VERIFIED_SUCCESS = "Verified Successfully";
+export const UNVERIFIED_SUCCESS = "Unverified Successfully";
+export const BLOCKED_SUCCESS = "Blocked Successfully";
+export const UNBLOCKED_SUCCESS = "Unblocked Successfully";
+export const PASSWORD_RESETED = "Password Reseted Successfully";

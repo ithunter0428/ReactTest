@@ -17,11 +17,11 @@ import { useEffect, useState } from "react";
 // @mui material components
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
-// import Dialog from "@mui/material/Dialog";
-// import DialogActions from "@mui/material/DialogActions";
-// import DialogContent from "@mui/material/DialogContent";
-// import DialogContentText from "@mui/material/DialogContentText";
-// import DialogTitle from "@mui/material/DialogTitle";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 // Material Dashboard 2 PRO React components
 import MDBox from "components/MDBox";
 import MDInput from "components/MDInput";
@@ -36,6 +36,7 @@ import DataTable from "examples/Tables/DataTable";
 import { getList, setState } from "api/studentcard";
 // Data
 import dataTableData from "layouts/verification/studentcard/list/data/dataTableData";
+import { VERIFIED_SUCCESS, UNVERIFIED_SUCCESS } from "constant";
 
 function StudentCardList() {
   const [key, setKey] = useState("");
@@ -43,6 +44,21 @@ function StudentCardList() {
   const [data, setData] = useState([]);
   const [pageSize, setPageSize] = useState(10);
   const [totalCount, setTotalCount] = useState(0);
+  const [open, setOpen] = useState(false);
+  const [msg, setMsg] = useState("");
+  // Dialog
+  const handleClose = () => {
+    setOpen(false);
+  };
+  // Call API for verification
+  const handleState = async (id, state) => {
+    const res = await setState(id, state);
+    if (res.res_code === 1) {
+      if (state === 2) setMsg(VERIFIED_SUCCESS);
+      else setMsg(UNVERIFIED_SUCCESS);
+      setOpen(true);
+    }
+  };
   // Load Data
   const getTableData = async (pageN, pageS, k) => {
     const res = await getList(pageN, pageS, k);
@@ -71,11 +87,7 @@ function StudentCardList() {
     setPageSize(size);
     getTableData(0, size, key);
   };
-  // Call API for verification
-  const handleState = async (id, state) => {
-    const res = await setState(id, state);
-    if (res.res_code === 1) alert("ok");
-  };
+
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -119,21 +131,20 @@ function StudentCardList() {
             onPageChange={handlePageChange}
           />
           {/* Dialog */}
-          {/* <Dialog
+          <Dialog
             open={open}
+            onClose={handleClose}
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
           >
             <DialogTitle id="alert-dialog-title">Success</DialogTitle>
             <DialogContent>
-              <DialogContentText id="alert-dialog-description">
-                Your password is changed successfully.
-              </DialogContentText>
+              <DialogContentText id="alert-dialog-description">{msg}</DialogContentText>
             </DialogContent>
             <DialogActions>
               <MDButton onClick={handleClose}>OK</MDButton>
             </DialogActions>
-          </Dialog> */}
+          </Dialog>
         </Card>
       </MDBox>
     </DashboardLayout>

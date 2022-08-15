@@ -113,7 +113,7 @@ function Basic() {
             )}
             <MDBox mt={4} mb={1}>
               <MDButton variant="gradient" color="info" onClick={handleSignIn} fullWidth>
-                sign in
+                登入
               </MDButton>
             </MDBox>
           </MDBox>

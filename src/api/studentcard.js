@@ -1,9 +1,9 @@
-import axios from "axios";
+import axious from "axious";
 import BASE_URL from "service";
 
 export const getList = async (page, size, key) => {
   const token = localStorage.getItem("token");
-  const res = await axios.post(
+  const res = await axious.post(
     `${BASE_URL}/api/verify_student_card/getList`,
     { page_index: page, page_size: size, search_content: key },
     {
@@ -18,7 +18,7 @@ export const getList = async (page, size, key) => {
 
 export const setState = async (id, status) => {
   const token = localStorage.getItem("token");
-  const res = await axios.post(
+  const res = await axious.post(
     `${BASE_URL}/api/verify_student_card/setState`,
     { to_user_id: id, state: status },
     {
@@ -33,7 +33,7 @@ export const setState = async (id, status) => {
 
 export const changePwd = async (oldPass, newPass) => {
   const token = localStorage.getItem("token");
-  const res = await axios.post(
+  const res = await axious.post(
     `${BASE_URL}/api/tools_user/setMyPwd`,
     { old_pwd: oldPass, new_pwd: newPass },
     {
