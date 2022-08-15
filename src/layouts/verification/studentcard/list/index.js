@@ -17,11 +17,11 @@ import { useEffect, useState } from "react";
 // @mui material components
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
+// import Dialog from "@mui/material/Dialog";
+// import DialogActions from "@mui/material/DialogActions";
+// import DialogContent from "@mui/material/DialogContent";
+// import DialogContentText from "@mui/material/DialogContentText";
+// import DialogTitle from "@mui/material/DialogTitle";
 // Material Dashboard 2 PRO React components
 import MDBox from "components/MDBox";
 import MDInput from "components/MDInput";
@@ -119,7 +119,7 @@ function StudentCardList() {
             onPageChange={handlePageChange}
           />
           {/* Dialog */}
-          <Dialog
+          {/* <Dialog
             open={open}
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
@@ -131,9 +131,9 @@ function StudentCardList() {
               </DialogContentText>
             </DialogContent>
             <DialogActions>
-              <MDButton onClick={handleDelete}>OK</MDButton>
+              <MDButton onClick={handleClose}>OK</MDButton>
             </DialogActions>
-          </Dialog>
+          </Dialog> */}
         </Card>
       </MDBox>
     </DashboardLayout>
