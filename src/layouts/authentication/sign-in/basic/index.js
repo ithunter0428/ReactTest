@@ -29,40 +29,38 @@ import MDInput from "components/MDInput";
 import MDButton from "components/MDButton";
 import MDBadge from "components/MDBadge";
 
+// Context
+import { useMaterialUIController, setUserName } from "context";
+
 // Authentication layout components
 import BasicLayout from "layouts/authentication/components/BasicLayout";
+import login from "api/session";
 
 // Images
 import bgImage from "assets/images/bg-sign-in-basic.jpeg";
 
-// BASE_URL
-import BASE_URL from "service";
-
-import axios from "axios";
-
 function Basic() {
+  const [controller, dispatch] = useMaterialUIController();
   const [rememberMe, setRememberMe] = useState(false);
   // const [username, setUserName] = useState("");
   // const [password, setPassword] = useState("");
   const [msg, setMsg] = useState("");
+  const [userid, setUserId] = useState("");
+  const [password, setPassWord] = useState("");
 
   const navigate = useNavigate();
 
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
 
   const handleSignIn = async () => {
-    const { data } = await axios.post(
-      `${BASE_URL}/api/tools_user/login`,
-      { username: "sugar2", pwd: "00000s0" },
-      {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const data = await login(userid, password);
     // Login Succes
     if (data.res_code === 1) {
+      localStorage.setItem("token", data.msg.token);
+      // Set Current UserName
+      if (controller.username !== data.msg.username) {
+        setUserName(dispatch, data.msg.username);
+      }
       navigate("/mainpage");
     }
     // Login Failed
@@ -79,10 +77,22 @@ function Basic() {
               <MDBadge color="info">半区管理后台</MDBadge>
             </MDBox>
             <MDBox mb={2}>
-              <MDInput type="text" label="用户名" fullWidth />
+              <MDInput
+                type="text"
+                label="用户名"
+                text={userid}
+                onChange={(e) => setUserId(e.target.value)}
+                fullWidth
+              />
             </MDBox>
             <MDBox mb={2}>
-              <MDInput type="password" label="登陆密码" fullWidth />
+              <MDInput
+                type="password"
+                label="登陆密码"
+                text={password}
+                onChange={(e) => setPassWord(e.target.value)}
+                fullWidth
+              />
             </MDBox>
             <MDBox display="flex" alignItems="center" ml={-1}>
               <Switch checked={rememberMe} onChange={handleSetRememberMe} />

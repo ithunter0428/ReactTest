@@ -13,6 +13,7 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
+import { useEffect, useState } from "react";
 // @mui material components
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
@@ -27,10 +28,45 @@ import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import DataTable from "examples/Tables/DataTable";
 
+import { getList } from "api/studentcard";
 // Data
 import dataTableData from "layouts/verification/studentcard/list/data/dataTableData";
 
-function StudneCardList() {
+function StudentCardList() {
+  const [key, setKey] = useState("");
+  const [pageNum, setPageNum] = useState(0);
+  const [data, setData] = useState([]);
+  const [pageSize, setPageSize] = useState(10);
+  const [totalCount, setTotalCount] = useState(0);
+  // Load Data
+  const getTableData = async (pageN, pageS, k) => {
+    const res = await getList(pageN, pageS, k);
+    setData(res.msg.data);
+    setTotalCount(res.msg.total_count);
+    return res;
+  };
+
+  useEffect(() => {
+    getTableData(pageNum, pageSize, key);
+    // setPageNum()
+  }, [pageNum]);
+
+  const handleSearch = () => {
+    setPageNum(0);
+    getTableData(0, pageSize, key);
+  };
+
+  const handlePageChange = (page) => {
+    setPageNum(page);
+    getTableData(page, pageSize, key);
+  };
+
+  // When Page Size is changed
+  const handlePageSizeChange = (size) => {
+    setPageNum(0);
+    setPageSize(size);
+    getTableData(0, size, key);
+  };
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -48,6 +84,8 @@ function StudneCardList() {
                         label="捜名称或手机号"
                         placeholder="捜名称或手机号"
                         variant="outlined"
+                        text={key}
+                        onChange={(e) => setKey(e.target.value)}
                         fullWidth
                       />
                     </MDBox>
@@ -55,7 +93,7 @@ function StudneCardList() {
                   {/* Search Button */}
                   <Grid item xs={12} sm={5} ml={3}>
                     <MDBox mb={1}>
-                      <MDButton variant="gradient" color="info">
+                      <MDButton variant="gradient" color="info" onClick={handleSearch}>
                         搜索
                       </MDButton>
                     </MDBox>
@@ -64,11 +102,17 @@ function StudneCardList() {
               </MDBox>
             </MDBox>
           </MDBox>
-          <DataTable table={dataTableData} entriesPerPage={false} />
+          <DataTable
+            table={dataTableData(data)}
+            activePage={pageNum}
+            totalCount={totalCount}
+            onPageSizeChange={handlePageSizeChange}
+            onPageChange={handlePageChange}
+          />
         </Card>
       </MDBox>
     </DashboardLayout>
   );
 }
 
-export default StudneCardList;
+export default StudentCardList;

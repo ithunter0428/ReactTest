@@ -28,98 +28,82 @@ import Icon from "@mui/material/Icon";
 import MDBox from "components/MDBox";
 import MDButton from "components/MDButton";
 
-const dataTableData = {
-  columns: [
-    {
-      Header: "后台用户",
-      width: "15%",
-      accessor: "tools_user_id",
-      Cell: ({ value }) => <IdCell id={value} />,
-    },
-    {
-      Header: "用户名",
-      width: "20%",
-      accessor: "username",
-      Cell: ({ value }) => <DefaultCell value={value} />,
-    },
-    {
-      Header: "权限",
-      width: "20%",
-      accessor: "role_id",
-      Cell: ({ value }) => <DefaultCell value={value} />,
-    },
-    {
-      Header: "状态",
-      width: "20%",
-      accessor: "state",
-      Cell: ({ value }) => {
-        let status;
-
-        if (value === 1) {
-          status = <StatusCell icon="done" color="success" status="正常" />;
-        } else {
-          status = <StatusCell icon="close" color="error" status="已禁用" />;
-        }
-
-        return status;
+const dataTableData = (data) => {
+  const tableData = {
+    columns: [
+      {
+        Header: "后台用户",
+        width: "15%",
+        accessor: "tools_user_id",
+        Cell: ({ value }) => <IdCell id={value.toString()} />,
       },
-    },
-    {
-      Header: "",
-      accessor: "action",
-      width: "25%",
-      Cell: ({ row }) => (
-        <MDBox mt={2} style={{ width: 200 }}>
-          <Grid container spacing={0}>
-            <Grid item xs={12} sm={6}>
-              <MDBox mb={1}>
-                <Link to="/user/details">
-                  <MDButton variant="outlined" color="dark" size="small">
-                    重置密码
-                  </MDButton>
-                </Link>
-              </MDBox>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <MDBox mb={1}>
-                {row.original.state === 1 && (
-                  <MDButton variant="outlined" color="dark" size="small">
-                    <Icon color="dark">block</Icon>&nbsp;禁用
-                  </MDButton>
-                )}
-                {row.original.state !== 1 && (
-                  <MDButton variant="outlined" color="dark" size="small">
-                    <Icon color="info">check</Icon>&nbsp;启用
-                  </MDButton>
-                )}
-              </MDBox>
-            </Grid>
-          </Grid>
-        </MDBox>
-      ),
-    },
-  ],
+      {
+        Header: "用户名",
+        width: "20%",
+        accessor: "username",
+        Cell: ({ value }) => <DefaultCell value={value.toString()} />,
+      },
+      {
+        Header: "权限",
+        width: "20%",
+        accessor: "role_id",
+        Cell: ({ value }) => <DefaultCell value={value.toString()} />,
+      },
+      {
+        Header: "状态",
+        width: "20%",
+        accessor: "state",
+        Cell: ({ value }) => {
+          let status;
 
-  rows: [
-    {
-      tools_user_id: 1,
-      username: "sugar",
-      role_id: 1,
-      state: 1,
-    },
-    {
-      tools_user_id: 2,
-      username: "sugar2",
-      role_id: 1,
-      state: 1,
-    },
-    {
-      tools_user_id: 3,
-      username: "sugar3",
-      role_id: 1,
-      state: 1,
-    },
-  ],
+          if (value === 1) {
+            status = <StatusCell icon="done" color="success" status="正常" />;
+          } else {
+            status = <StatusCell icon="close" color="error" status="已禁用" />;
+          }
+
+          return status;
+        },
+      },
+      {
+        Header: "",
+        accessor: "action",
+        width: "25%",
+        Cell: ({ row }) => (
+          <MDBox mt={2} style={{ width: 200 }}>
+            <Grid container spacing={0}>
+              <Grid item xs={12} sm={6}>
+                <MDBox mb={1}>
+                  <Link to="/change_pass">
+                    <MDButton variant="outlined" color="dark" size="small">
+                      重置密码
+                    </MDButton>
+                  </Link>
+                </MDBox>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <MDBox mb={1}>
+                  {row.original.state === 1 && (
+                    <MDButton variant="outlined" color="dark" size="small">
+                      <Icon color="dark">block</Icon>&nbsp;禁用
+                    </MDButton>
+                  )}
+                  {row.original.state !== 1 && (
+                    <MDButton variant="outlined" color="dark" size="small">
+                      <Icon color="info">check</Icon>&nbsp;启用
+                    </MDButton>
+                  )}
+                </MDBox>
+              </Grid>
+            </Grid>
+          </MDBox>
+        ),
+      },
+    ],
+
+    rows: data,
+  };
+  return tableData;
 };
 
 export default dataTableData;

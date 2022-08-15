@@ -13,7 +13,7 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // @mui material components
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
@@ -32,12 +32,50 @@ import DataTable from "examples/Tables/DataTable";
 
 // Data
 import dataTableData from "layouts/post/list/data/dataTableData";
+import { getList } from "api/post";
 
 function UserList() {
   const [key, setKey] = useState("");
-  // const [category, setCategory] = useState('全部')
+  const [pageNum, setPageNum] = useState(0);
+  const [data, setData] = useState([]);
+  const [pageSize, setPageSize] = useState(10);
+  const [totalCount, setTotalCount] = useState(0);
+  const [status, setStatus] = useState(0);
+  // Load Data
+  const getTableData = async (pageN, pageS, k, stat) => {
+    const res = await getList(pageN, pageS, k, stat);
+    setData(res.msg.data);
+    setTotalCount(res.msg.total_count);
+    return res;
+  };
+
+  useEffect(() => {
+    getTableData(pageNum, pageSize, key, status);
+    // setPageNum()
+  }, [pageNum]);
+
   const handleSearch = () => {
-    // dataTableData.rows = [];
+    setPageNum(0);
+    getTableData(0, pageSize, key, status);
+  };
+
+  const handlePageChange = (page) => {
+    setPageNum(page);
+    getTableData(page, pageSize, key, status);
+  };
+
+  // When Page Size is changed
+  const handlePageSizeChange = (size) => {
+    setPageNum(0);
+    setPageSize(size);
+    getTableData(0, size, key, status);
+  };
+
+  // When State change
+  const handleStateChange = (event, str) => {
+    if (str === "全部") setStatus(0);
+    if (str === "正常") setStatus(1);
+    if (str === "已禁用") setStatus(-1);
   };
   return (
     <DashboardLayout>
@@ -67,6 +105,7 @@ function UserList() {
                     <Autocomplete
                       defaultValue="全部"
                       options={["全部", "日常", "招募", "看法", "活动", "项目", "转发"]}
+                      onChange={handleStateChange}
                       renderInput={(params) => <MDInput {...params} variant="standard" />}
                     />
                   </Grid>
@@ -82,7 +121,13 @@ function UserList() {
               </MDBox>
             </MDBox>
           </MDBox>
-          <DataTable table={dataTableData} entriesPerPage={false} />
+          <DataTable
+            table={dataTableData(data)}
+            activePage={pageNum}
+            totalCount={totalCount}
+            onPageChange={handlePageChange}
+            onPageSizeChange={handlePageSizeChange}
+          />
         </Card>
       </MDBox>
     </DashboardLayout>

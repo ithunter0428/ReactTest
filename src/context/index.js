@@ -32,6 +32,9 @@ MaterialUI.displayName = "MaterialUIContext";
 // Material Dashboard 2 PRO React reducer
 function reducer(state, action) {
   switch (action.type) {
+    case "USERNAME": {
+      return { ...state, username: action.value };
+    }
     case "MINI_SIDENAV": {
       return { ...state, miniSidenav: action.value };
     }
@@ -119,6 +122,7 @@ const setOpenConfigurator = (dispatch, value) => dispatch({ type: "OPEN_CONFIGUR
 const setDirection = (dispatch, value) => dispatch({ type: "DIRECTION", value });
 const setLayout = (dispatch, value) => dispatch({ type: "LAYOUT", value });
 const setDarkMode = (dispatch, value) => dispatch({ type: "DARKMODE", value });
+const setUserName = (dispatch, value) => dispatch({ type: "USERNAME", value });
 
 export {
   MaterialUIControllerProvider,
@@ -133,4 +137,5 @@ export {
   setDirection,
   setLayout,
   setDarkMode,
+  setUserName,
 };

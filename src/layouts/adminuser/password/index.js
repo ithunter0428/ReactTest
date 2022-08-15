@@ -13,15 +13,22 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 // @mui material components
 // import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 // import Autocomplete from "@mui/material/Autocomplete";
 
 // Material Dashboard 2 PRO React components
 import MDBox from "components/MDBox";
-// import MDTypography from "components/MDTypography";
+import MDTypography from "components/MDTypography";
 import MDInput from "components/MDInput";
 import MDButton from "components/MDButton";
 import MDBadge from "components/MDBadge";
@@ -29,8 +36,31 @@ import MDBadge from "components/MDBadge";
 // Material Dashboard 2 PRO React examples
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
+// API
+import { changePwd } from "api/tooluser";
 
 function UserForm() {
+  const navigate = useNavigate();
+  const [msg, setMsg] = useState("");
+  const [oldPass, setOldPass] = useState("");
+  const [newPass, setNewPass] = useState("");
+  const [open, setOpen] = useState(false);
+  const handleSubmit = async () => {
+    const data = await changePwd(oldPass, newPass);
+    // Login Succes
+    if (data.res_code === 1) {
+      setOpen(true);
+    }
+    // Login Failed
+    else {
+      setMsg(data.msg);
+    }
+  };
+  // Dialog
+  const handleDelete = () => {
+    setOpen(false);
+    navigate(-1);
+  };
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -44,16 +74,48 @@ function UserForm() {
                     <MDBadge color="info">新建</MDBadge>
                   </MDBox>
                   <MDBox mb={2}>
-                    <MDInput type="text" label="用户名" fullWidth />
+                    <MDInput
+                      type="password"
+                      label="用户名"
+                      value={oldPass}
+                      onChange={(e) => setOldPass(e.target.value)}
+                      fullWidth
+                    />
                   </MDBox>
                   <MDBox mb={2}>
-                    <MDInput type="password" label="登陆密码" fullWidth />
+                    <MDInput
+                      type="password"
+                      label="登陆密码"
+                      value={newPass}
+                      onChange={(e) => setNewPass(e.target.value)}
+                      fullWidth
+                    />
                   </MDBox>
+                  {msg !== "" && (
+                    <MDTypography color="primary" size="small" fontWeight="regular">
+                      {msg}
+                    </MDTypography>
+                  )}
                   <MDBox mt={4} mb={1}>
-                    <MDButton variant="gradient" color="info" fullWidth>
+                    <MDButton variant="gradient" color="info" onClick={handleSubmit} fullWidth>
                       新建
                     </MDButton>
                   </MDBox>
+                  <Dialog
+                    open={open}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                  >
+                    <DialogTitle id="alert-dialog-title">Success</DialogTitle>
+                    <DialogContent>
+                      <DialogContentText id="alert-dialog-description">
+                        Your password is changed successfully.
+                      </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                      <MDButton onClick={handleDelete}>OK</MDButton>
+                    </DialogActions>
+                  </Dialog>
                 </MDBox>
               </MDBox>
             </Card>
