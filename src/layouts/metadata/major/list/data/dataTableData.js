@@ -60,7 +60,16 @@ const dataTableData = {
             </Grid>
             <Grid item xs={12} sm={6}>
               <MDBox mb={1}>
+<<<<<<< HEAD
                 <MDButton variant="outlined" color="dark" size="small">
+=======
+                <MDButton
+                  variant="outlined"
+                  color="dark"
+                  size="small"
+                  onClick={() => deleteRow(row.original.school_id)}
+                >
+>>>>>>> master
                   删除
                 </MDButton>
               </MDBox>
