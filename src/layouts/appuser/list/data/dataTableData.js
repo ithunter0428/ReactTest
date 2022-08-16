@@ -92,7 +92,7 @@ const dataTableData = (data, handleState) => {
       {
         Header: "注册时间",
         accessor: "create_time",
-        Cell: ({ value }) => <DefaultCell value={moment(value).format("YYYY-MM-DD HH:MM")} />,
+        Cell: ({ value }) => <DefaultCell value={moment(value).format("YYYY-MM-DD HH:MM:SS")} />,
       },
       {
         Header: "",

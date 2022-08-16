@@ -170,7 +170,7 @@ function DataTable({
                 renderInput={(params) => <MDInput {...params} />}
               />
               <MDTypography variant="caption" color="secondary">
-                &nbsp;&nbsp;entries per page
+                &nbsp;&nbsp;每页条目
               </MDTypography>
             </MDBox>
           )}
@@ -237,7 +237,7 @@ function DataTable({
         {showTotalEntries && (
           <MDBox mb={{ xs: 3, sm: 0 }}>
             <MDTypography variant="button" color="secondary" fontWeight="regular">
-              Showing {entriesStart} to {entriesEnd} of {totalCount} entries
+              显示 {entriesStart} 到 {entriesEnd} 个条目，共 {totalCount} 个条目
             </MDTypography>
           </MDBox>
         )}
