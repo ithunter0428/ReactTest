@@ -30,8 +30,6 @@ import MDBadge from "components/MDBadge";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 
-import profilePicture from "assets/images/team-3.jpg";
-
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { addOrUpdate, getDetail } from "api/hobby";
@@ -46,9 +44,10 @@ function SchoolForm() {
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertSeverity, setAlertSeverity] = useState("success");
   const [alertMessage, setAlertMessage] = useState("");
+  const [image, setImage] = useState("");
 
   const save = async () => {
-    const result = await addOrUpdate(id || -1, name, enName, "");
+    const result = await addOrUpdate(id || -1, name, enName, image);
     if (result.res_code < 0) {
       setAlertSeverity("error");
       setAlertMessage(result.msg);
@@ -68,6 +67,7 @@ function SchoolForm() {
     } else {
       setName(result.msg.name);
       setEnName(result.msg.en_name);
+      setImage(result.msg.img_url);
     }
   };
 
@@ -110,19 +110,18 @@ function SchoolForm() {
                   {/* Image */}
                   <MDBox mb={2}>
                     <Grid container spaing={2}>
-                      <Grid item>
-                        <MDTypography variant="h6" fontWeight="regular" color="text">
-                          图标:&nbsp;&nbsp;&nbsp;
-                        </MDTypography>
+                      <Grid item mr={1}>
+                        <MDButton variant="contained" component="label" color="success" fullWidth>
+                          图标
+                          <input
+                            type="file"
+                            hidden
+                            onChange={(e) => setImage(URL.createObjectURL(e.target.files[0]))}
+                          />
+                        </MDButton>
                       </Grid>
                       <Grid item sm={3}>
-                        <MDBox
-                          component="img"
-                          src={profilePicture}
-                          alt="Product Image"
-                          shadow="lg"
-                          width="100%"
-                        />
+                        <MDBox component="img" src={image} shadow="lg" width="100%" />
                       </Grid>
                     </Grid>
                   </MDBox>
