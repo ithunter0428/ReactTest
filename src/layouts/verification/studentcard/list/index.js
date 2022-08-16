@@ -53,6 +53,15 @@ function StudentCardList() {
   const handleClose = () => {
     setOpen(false);
   };
+  // Update state so it will change UI
+  const updateData = (id) => {
+    const card = data.filter((item) => item.to_user_id === id)[0];
+    // find card in array and change its state.
+    const cardList = data;
+    const index = cardList.indexOf(card);
+    cardList.splice(index, 1);
+    setData(cardList);
+  };
   // Call API for verification
   const handleState = async (id, state) => {
     const res = await setState(id, state);
@@ -60,6 +69,7 @@ function StudentCardList() {
       if (state === 2) setMsg(VERIFIED_SUCCESS);
       else setMsg(UNVERIFIED_SUCCESS);
       setOpen(true);
+      updateData();
     }
   };
   // Load Data
@@ -144,6 +154,8 @@ function StudentCardList() {
             onClose={handleClose}
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
+            maxWidth="sm"
+            fullWidth
           >
             <DialogTitle id="alert-dialog-title">成功</DialogTitle>
             <DialogContent>

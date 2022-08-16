@@ -17,6 +17,7 @@ Coded by www.creative-tim.com
 // import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
+import Icon from "@mui/material/Icon";
 // import Autocomplete from "@mui/material/Autocomplete";
 
 // Material Dashboard 2 PRO React components
@@ -31,29 +32,41 @@ import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { addOrUpdate, getDetail } from "api/skill";
+import uploadImg from "api/upload";
 import AlertMessage from "components/AlertMessage";
 
 function SchoolForm() {
   const location = useLocation();
+  const navigate = useNavigate();
   const id = new URLSearchParams(location.search).get("id"); // if id is not set, it's add
   const isAdd = id == null;
   const [name, setName] = useState("");
   const [enName, setEnName] = useState("");
   const [alertOpen, setAlertOpen] = useState(false);
-  const [alertSeverity, setAlertSeverity] = useState("success");
+  const [alertSeverity, setAlertSeverity] = useState("成功");
   const [alertMessage, setAlertMessage] = useState("");
   const [image, setImage] = useState("");
+  const init = () => {
+    setName("");
+    setEnName("");
+    setImage("");
+  };
 
   const save = async () => {
-    const result = await addOrUpdate(id || -1, name, enName, image);
+    let imgUrl = image;
+    if (image !== "" && document.getElementById("image").files.length > 0) {
+      imgUrl = await uploadImg(document.getElementById("image").files[0], "school");
+    }
+    const result = await addOrUpdate(id || -1, name, enName, imgUrl);
     if (result.res_code < 0) {
-      setAlertSeverity("error");
+      setAlertSeverity("错误");
       setAlertMessage(result.msg);
     } else {
-      setAlertSeverity("success");
-      setAlertMessage(`Successfully ${isAdd ? "added" : "updated"}`);
+      setAlertSeverity("成功");
+      setAlertMessage(`已成功 ${isAdd ? "添加" : "更新"}`);
+      if (isAdd === true) init();
     }
     setAlertOpen(true);
   };
@@ -61,7 +74,7 @@ function SchoolForm() {
   const loadDetailInfo = async () => {
     const result = await getDetail(id);
     if (result.res_code < 0) {
-      setAlertSeverity("error");
+      setAlertSeverity("错误");
       setAlertMessage(result.msg);
       setAlertOpen(true);
     } else {
@@ -80,6 +93,11 @@ function SchoolForm() {
   return (
     <DashboardLayout>
       <DashboardNavbar />
+      <Grid item xs={12} md={12} sx={{ textAlign: "right" }} mb={2} mr={2}>
+        <MDButton variant="outlined" color="dark" onClick={() => navigate(-1)}>
+          <Icon>arrow_left</Icon>&nbsp; 返回
+        </MDButton>
+      </Grid>
       <MDBox px={1} width="100%" height="100vh" mx="auto" my={15}>
         <Grid container spacing={1} justifyContent="center" height="100%">
           <Grid item xs={11} sm={9} md={5} lg={4} xl={3}>
@@ -115,6 +133,7 @@ function SchoolForm() {
                           图标
                           <input
                             type="file"
+                            id="image"
                             hidden
                             onChange={(e) => setImage(URL.createObjectURL(e.target.files[0]))}
                           />

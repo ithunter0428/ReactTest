@@ -75,7 +75,7 @@ const dataTableData = (data, deleteRow) => ({
                   variant="outlined"
                   color="dark"
                   size="small"
-                  onClick={() => deleteRow(row.original.school_id)}
+                  onClick={() => deleteRow(row.original.hobby_id)}
                 >
                   删除
                 </MDButton>

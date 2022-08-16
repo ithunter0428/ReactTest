@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
 import PropTypes from "prop-types";
-import { Snackbar, Alert } from "@mui/material";
+import MDSnackbar from "components/MDSnackbar";
 
 const AlertMessage = forwardRef(({ open, setOpen, severity, message }, ref) => {
   const handleClose = () => {
@@ -8,17 +8,18 @@ const AlertMessage = forwardRef(({ open, setOpen, severity, message }, ref) => {
   };
 
   return (
-    <Snackbar
+    <MDSnackbar
+      color="success"
+      icon="check"
+      title={severity}
+      content={message}
       open={open}
       ref={ref}
-      autoHideDuration={6000}
+      autoHideDuration={3000}
       onClose={handleClose}
-      anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-    >
-      <Alert onClose={handleClose} severity={severity} sx={{ width: "100%" }}>
-        {message}
-      </Alert>
-    </Snackbar>
+      close={handleClose}
+      anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+    />
   );
 });
 

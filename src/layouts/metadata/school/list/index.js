@@ -45,14 +45,14 @@ function UserList() {
   const [totalCount, setTotalCount] = useState(0);
   const [dlgOpen, setDlgOpen] = useState(false);
   const [alertOpen, setAlertOpen] = useState(false);
-  const [alertSeverity, setAlertSeverity] = useState("success");
+  const [alertSeverity, setAlertSeverity] = useState("成功");
   const [alertMessage, setAlertMessage] = useState("");
   const [curRow, setCurRow] = useState(-1);
 
   const getTableData = async (pageN, pageS, k) => {
     const result = await getList(pageN, pageS, k);
     if (result.res_code < 0) {
-      setAlertSeverity("error");
+      setAlertSeverity("错误");
       setAlertMessage(result.msg);
       setAlertOpen(true);
       return [];
@@ -90,11 +90,11 @@ function UserList() {
   const handleDelete = async () => {
     const result = await del(curRow);
     if (result.res_code < 0) {
-      setAlertSeverity("error");
+      setAlertSeverity("错误");
       setAlertMessage(result.msg);
     } else {
-      setAlertSeverity("success");
-      setAlertMessage("Successfully deleted");
+      setAlertSeverity("成功");
+      setAlertMessage("已成功删除");
       getTableData(pageNum, pageSize, key);
     }
     setAlertOpen(true);

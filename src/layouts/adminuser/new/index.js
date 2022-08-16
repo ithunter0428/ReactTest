@@ -97,7 +97,7 @@ function UserForm() {
                   )}
                   <MDBox mt={4} mb={1}>
                     <MDButton variant="gradient" color="info" onClick={handleSubmit} fullWidth>
-                      Create
+                      创造
                     </MDButton>
                   </MDBox>
                   <Dialog

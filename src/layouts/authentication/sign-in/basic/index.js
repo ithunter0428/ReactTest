@@ -57,6 +57,7 @@ function Basic() {
     // Login Succes
     if (data.res_code === 1) {
       localStorage.setItem("token", data.msg.token);
+      localStorage.setItem("username", data.msg.username);
       // Set Current UserName
       if (controller.username !== data.msg.username) {
         setUserName(dispatch, data.msg.username);
