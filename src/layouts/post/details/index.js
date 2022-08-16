@@ -12,7 +12,7 @@ Coded by www.creative-tim.com
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import moment from "moment";
 // @mui material components
@@ -53,7 +53,7 @@ function UserList() {
   // Use Effect
   useEffect(() => {
     getData();
-  }, [true]);
+  }, [location]);
 
   return (
     <DashboardLayout>
@@ -180,7 +180,8 @@ function UserList() {
                         </Grid>
                         <Grid item sm={9}>
                           <MDTypography variant="caption" fontWeight="medium" color="text">
-                            正常 | 已禁用
+                            {post.state === 1 && "正常"}
+                            {post.state === -1 && "已禁用"}
                           </MDTypography>
                         </Grid>
                       </Grid>
@@ -196,7 +197,12 @@ function UserList() {
                         </Grid>
                         <Grid item sm={7}>
                           <MDTypography variant="caption" fontWeight="medium" color="text">
-                            324
+                            {post.parent_id === 0 && post.parent_id}
+                            {post.parent_id !== 0 && (
+                              <Link to={`/post/details?id=${post.parent_id}`}>
+                                {post.parent_id}
+                              </Link>
+                            )}
                           </MDTypography>
                         </Grid>
                       </Grid>

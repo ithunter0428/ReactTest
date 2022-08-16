@@ -50,7 +50,16 @@ const dataTableData = (data, handleState) => {
       {
         Header: "学生卡验证状态",
         accessor: "verify_state",
-        Cell: ({ value }) => <DefaultCell value={value.toString()} />,
+        Cell: (props) => {
+          let status;
+          if (props.value > 0) {
+            status = <StatusCell icon="done" color="success" status="通过" />;
+          } else {
+            status = <StatusCell icon="close" color="error" status="不通过" />;
+          }
+
+          return status;
+        },
       },
       {
         Header: "是否完善信息",

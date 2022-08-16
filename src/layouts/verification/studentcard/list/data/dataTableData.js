@@ -25,7 +25,7 @@ import Icon from "@mui/material/Icon";
 import MDBox from "components/MDBox";
 import MDButton from "components/MDButton";
 
-const dataTableData = (data, changeState) => {
+const dataTableData = (data, changeState, handleImg) => {
   const tableData = {
     columns: [
       {
@@ -51,7 +51,14 @@ const dataTableData = (data, changeState) => {
         accessor: "student_card_img_url",
         width: "20%",
         Cell: ({ value }) => (
-          <MDBox component="img" src={value} alt="Product Image" shadow="lg" width="30px" />
+          <MDBox
+            component="img"
+            src={value}
+            alt="Product Image"
+            shadow="lg"
+            width="30px"
+            onClick={() => handleImg(value)}
+          />
         ),
       },
       {

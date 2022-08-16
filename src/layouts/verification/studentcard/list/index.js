@@ -46,6 +46,9 @@ function StudentCardList() {
   const [totalCount, setTotalCount] = useState(0);
   const [open, setOpen] = useState(false);
   const [msg, setMsg] = useState("");
+  // Imgage Dialog
+  const [expanded, setExpanded] = useState(false);
+  const [imgUrl, setImgUrl] = useState("");
   // Dialog
   const handleClose = () => {
     setOpen(false);
@@ -88,6 +91,11 @@ function StudentCardList() {
     getTableData(0, size, key);
   };
 
+  const handleImg = (url) => {
+    setImgUrl(url);
+    setExpanded(true);
+  };
+
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -124,7 +132,7 @@ function StudentCardList() {
             </MDBox>
           </MDBox>
           <DataTable
-            table={dataTableData(data, handleState)}
+            table={dataTableData(data, handleState, handleImg)}
             activePage={pageNum}
             totalCount={totalCount}
             onPageSizeChange={handlePageSizeChange}
@@ -137,12 +145,27 @@ function StudentCardList() {
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
           >
-            <DialogTitle id="alert-dialog-title">Success</DialogTitle>
+            <DialogTitle id="alert-dialog-title">成功</DialogTitle>
             <DialogContent>
               <DialogContentText id="alert-dialog-description">{msg}</DialogContentText>
             </DialogContent>
             <DialogActions>
-              <MDButton onClick={handleClose}>OK</MDButton>
+              <MDButton onClick={handleClose}>好的</MDButton>
+            </DialogActions>
+          </Dialog>
+          {/* Image Dialog */}
+          <Dialog
+            open={expanded}
+            onClose={() => setExpanded(false)}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">卡片图片</DialogTitle>
+            <DialogContent>
+              <MDBox component="img" src={imgUrl} alt="Product Image" shadow="lg" width="100%" />
+            </DialogContent>
+            <DialogActions>
+              <MDButton onClick={() => setExpanded(false)}>关闭</MDButton>
             </DialogActions>
           </Dialog>
         </Card>

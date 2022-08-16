@@ -16,7 +16,7 @@ Coded by www.creative-tim.com
 import { useState, useEffect } from "react";
 
 // react-router components
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 
 // prop-types is a library for typechecking of props.
 import PropTypes from "prop-types";
@@ -58,6 +58,13 @@ function DashboardNavbar({ absolute, light, isMini }) {
   const { miniSidenav, transparentNavbar, fixedNavbar, darkMode } = controller;
   // const [openMenu, setOpenMenu] = useState(false);
   const route = useLocation().pathname.split("/").slice(1);
+  const navigate = useNavigate();
+  // Log Out function
+  const logOut = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+    navigate("/authentication/sign-in");
+  };
 
   useEffect(() => {
     // Setting the navbar type
@@ -134,9 +141,9 @@ function DashboardNavbar({ absolute, light, isMini }) {
             </MDBox>
             {/* Logout */}
             <MDBox ml={1} mb={1}>
-              <Link to="/authentication/sign-in">
-                <MDButton size="small">退出登录</MDButton>
-              </Link>
+              <MDButton onClick={logOut} size="small">
+                退出登录
+              </MDButton>
             </MDBox>
           </MDBox>
         )}

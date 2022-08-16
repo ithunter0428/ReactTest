@@ -132,8 +132,8 @@ function CommunityDetails() {
                         </Grid>
                         <Grid item sm={9}>
                           <MDTypography variant="caption" fontWeight="medium" color="text">
-                            {community.state === 1 && "Normal"}
-                            {community.state === -1 && "Blocked"}
+                            {community.state === 1 && "正常"}
+                            {community.state === -1 && "已禁用"}
                           </MDTypography>
                         </Grid>
                       </Grid>

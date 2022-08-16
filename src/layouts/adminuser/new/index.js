@@ -70,7 +70,7 @@ function UserForm() {
               <MDBox pt={4} pb={3} px={3}>
                 <MDBox component="form" role="form">
                   <MDBox mb={2} textAlign="center">
-                    <MDBadge color="info">半区管理后台</MDBadge>
+                    <MDBadge color="info">创建用户</MDBadge>
                   </MDBox>
                   <MDBox mb={2}>
                     <MDInput
@@ -104,15 +104,17 @@ function UserForm() {
                     open={open}
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description"
+                    maxWidth="sm"
+                    fullWidth
                   >
-                    <DialogTitle id="alert-dialog-title">Success</DialogTitle>
+                    <DialogTitle id="alert-dialog-title">成功</DialogTitle>
                     <DialogContent>
                       <DialogContentText id="alert-dialog-description">
-                        You create user successfully.
+                        您成功创建用户。
                       </DialogContentText>
                     </DialogContent>
                     <DialogActions>
-                      <MDButton onClick={handleDelete}>OK</MDButton>
+                      <MDButton onClick={handleDelete}>好的</MDButton>
                     </DialogActions>
                   </Dialog>
                 </MDBox>

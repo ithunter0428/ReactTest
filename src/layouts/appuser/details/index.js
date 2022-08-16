@@ -56,37 +56,6 @@ function UserList() {
   useEffect(() => {
     getData();
   }, [true]);
-  // const EducationList = data.education_arr.map((education) => (
-  //   <MDBox
-  //     component="li"
-  //     display="flex"
-  //     justifyContent="space-between"
-  //     alignItems="flex-start"
-  //     bgColor="grey-100"
-  //     borderRadius="lg"
-  //     p={3}
-  //     mr={4}
-  //     mb={2}
-  //   >
-  //     <MDBox width="100%" display="flex" flexDirection="column" lineHeight={1}>
-  //       <MDBox mb={1} lineHeight={0}>
-  //         <MDTypography variant="caption" fontWeight="medium">
-  //           {education.school_name}
-  //         </MDTypography>
-  //       </MDBox>
-  //       <MDBox mb={1} lineHeight={0}>
-  //         <MDTypography variant="caption" fontWeight="medium">
-  //           {education.degree_name}
-  //         </MDTypography>
-  //       </MDBox>
-  //       <MDBox mb={1} lineHeight={0}>
-  //         <MDTypography variant="caption" fontWeight="medium">
-  //           {education.major_name}
-  //         </MDTypography>
-  //       </MDBox>
-  //     </MDBox>
-  //   </MDBox>
-  // ));
 
   return (
     <DashboardLayout>

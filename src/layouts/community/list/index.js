@@ -163,13 +163,15 @@ function CommunityList() {
             onClose={handleClose}
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
+            maxWidth="sm"
+            fullWidth
           >
-            <DialogTitle id="alert-dialog-title">Success</DialogTitle>
+            <DialogTitle id="alert-dialog-title">成功</DialogTitle>
             <DialogContent>
               <DialogContentText id="alert-dialog-description">{msg}</DialogContentText>
             </DialogContent>
             <DialogActions>
-              <MDButton onClick={handleClose}>OK</MDButton>
+              <MDButton onClick={handleClose}>好的</MDButton>
             </DialogActions>
           </Dialog>
         </Card>

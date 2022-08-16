@@ -71,12 +71,12 @@ function UserForm() {
               <MDBox pt={4} pb={3} px={3}>
                 <MDBox component="form" role="form">
                   <MDBox mb={2} textAlign="center">
-                    <MDBadge color="info">新建</MDBadge>
+                    <MDBadge color="info">更改密码</MDBadge>
                   </MDBox>
                   <MDBox mb={2}>
                     <MDInput
                       type="password"
-                      label="用户名"
+                      label="当前密码"
                       value={oldPass}
                       onChange={(e) => setOldPass(e.target.value)}
                       fullWidth
@@ -85,7 +85,7 @@ function UserForm() {
                   <MDBox mb={2}>
                     <MDInput
                       type="password"
-                      label="登陆密码"
+                      label="新密码"
                       value={newPass}
                       onChange={(e) => setNewPass(e.target.value)}
                       fullWidth
@@ -98,22 +98,24 @@ function UserForm() {
                   )}
                   <MDBox mt={4} mb={1}>
                     <MDButton variant="gradient" color="info" onClick={handleSubmit} fullWidth>
-                      新建
+                      改变
                     </MDButton>
                   </MDBox>
                   <Dialog
                     open={open}
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description"
+                    maxWidth="sm"
+                    fullWidth
                   >
-                    <DialogTitle id="alert-dialog-title">Success</DialogTitle>
+                    <DialogTitle id="alert-dialog-title">成功</DialogTitle>
                     <DialogContent>
                       <DialogContentText id="alert-dialog-description">
-                        Your password is changed successfully.
+                        您的密码已成功更改。
                       </DialogContentText>
                     </DialogContent>
                     <DialogActions>
-                      <MDButton onClick={handleDelete}>OK</MDButton>
+                      <MDButton onClick={handleDelete}>好的</MDButton>
                     </DialogActions>
                   </Dialog>
                 </MDBox>
