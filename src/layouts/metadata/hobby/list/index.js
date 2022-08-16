@@ -13,7 +13,6 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useState } from "react";
 import { Link } from "react-router-dom";
 // @mui material components
 import Grid from "@mui/material/Grid";
@@ -34,12 +33,74 @@ import DataTable from "examples/Tables/DataTable";
 // Data
 import dataTableData from "layouts/metadata/hobby/list/data/dataTableData";
 
+import { useState, useEffect } from "react";
+import { getList, del } from "api/hobby";
+import DeleteConfirmDlg from "components/DeleteConfirmDlg";
+import AlertMessage from "components/AlertMessage";
+
 function UserList() {
   const [key, setKey] = useState("");
-  // const [category, setCategory] = useState('全部')
-  const handleSearch = () => {
-    // dataTableData.rows = [];
+  const [pageNum, setPageNum] = useState(0);
+  const [data, setData] = useState([]);
+  const [pageSize, setPageSize] = useState(10);
+  const [totalCount, setTotalCount] = useState(0);
+  const [dlgOpen, setDlgOpen] = useState(false);
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertSeverity, setAlertSeverity] = useState("success");
+  const [alertMessage, setAlertMessage] = useState("");
+  const [curRow, setCurRow] = useState(-1);
+
+  const getTableData = async (pageN, pageS, k) => {
+    const result = await getList(pageN, pageS, k);
+    if (result.res_code < 0) {
+      setAlertSeverity("error");
+      setAlertMessage(result.msg);
+      setAlertOpen(true);
+      return [];
+    }
+    setData(result.msg.data);
+    setTotalCount(result.msg.total_count);
+    return data;
   };
+
+  useEffect(() => {
+    getTableData(pageNum, pageSize, key);
+  }, [pageNum]);
+
+  const handleSearch = () => {
+    setPageNum(0);
+    getTableData(0, pageSize, key);
+  };
+
+  const handlePageChange = (page) => {
+    setPageNum(page);
+    getTableData(page, pageSize, key);
+  };
+
+  const handlePageSizeChange = (size) => {
+    setPageNum(0);
+    setPageSize(size);
+    getTableData(0, size, key);
+  };
+
+  const deleteRow = (id) => {
+    setCurRow(id);
+    setDlgOpen(true);
+  };
+
+  const handleDelete = async () => {
+    const result = await del(curRow);
+    if (result.res_code < 0) {
+      setAlertSeverity("error");
+      setAlertMessage(result.msg);
+    } else {
+      setAlertSeverity("success");
+      setAlertMessage("Successfully deleted");
+      getTableData(pageNum, pageSize, key);
+    }
+    setAlertOpen(true);
+  };
+
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -90,7 +151,20 @@ function UserList() {
               </MDButton>
             </Link>
           </Grid>
-          <DataTable table={dataTableData} entriesPerPage={false} />
+          <DataTable
+            table={dataTableData(data, deleteRow)}
+            activePage={pageNum}
+            totalCount={totalCount}
+            onPageSizeChange={handlePageSizeChange}
+            onPageChange={handlePageChange}
+          />
+          <DeleteConfirmDlg open={dlgOpen} setOpen={setDlgOpen} onDelete={handleDelete} />
+          <AlertMessage
+            open={alertOpen}
+            setOpen={setAlertOpen}
+            severity={alertSeverity}
+            message={alertMessage}
+          />
         </Card>
       </MDBox>
     </DashboardLayout>

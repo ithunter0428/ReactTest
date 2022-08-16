@@ -32,7 +32,51 @@ import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 
 import profilePicture from "assets/images/team-3.jpg";
 
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { addOrUpdate, getDetail } from "api/skill";
+import AlertMessage from "components/AlertMessage";
+
 function SchoolForm() {
+  const location = useLocation();
+  const id = new URLSearchParams(location.search).get("id"); // if id is not set, it's add
+  const isAdd = id == null;
+  const [name, setName] = useState("");
+  const [enName, setEnName] = useState("");
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertSeverity, setAlertSeverity] = useState("success");
+  const [alertMessage, setAlertMessage] = useState("");
+
+  const save = async () => {
+    const result = await addOrUpdate(id || -1, name, enName);
+    if (result.res_code < 0) {
+      setAlertSeverity("error");
+      setAlertMessage(result.msg);
+    } else {
+      setAlertSeverity("success");
+      setAlertMessage(`Successfully ${isAdd ? "added" : "updated"}`);
+    }
+    setAlertOpen(true);
+  };
+
+  const loadDetailInfo = async () => {
+    const result = await getDetail(id);
+    if (result.res_code < 0) {
+      setAlertSeverity("error");
+      setAlertMessage(result.msg);
+      setAlertOpen(true);
+    } else {
+      setName(result.msg.name);
+      setEnName(result.msg.en_name);
+    }
+  };
+
+  useEffect(() => {
+    if (!isAdd) {
+      loadDetailInfo();
+    }
+  }, []);
+
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -43,23 +87,25 @@ function SchoolForm() {
               <MDBox pt={4} pb={3} px={3}>
                 <MDBox component="form" role="form">
                   <MDBox mb={2} textAlign="center">
-                    <MDBadge color="info">新建</MDBadge>
+                    <MDBadge color="info">{isAdd ? "创建" : "编辑"}</MDBadge>
                   </MDBox>
                   {/* School Id */}
-                  <MDBox mb={2}>
-                    <Grid container spaing={2} mt={2} mb={3}>
-                      <Grid item>
-                        <MDTypography variant="h6" fontWeight="regular" color="text">
-                          技能ID:&nbsp;&nbsp;&nbsp;
-                        </MDTypography>
+                  {!isAdd && (
+                    <MDBox mb={2}>
+                      <Grid container spaing={2} mt={2} mb={3}>
+                        <Grid item>
+                          <MDTypography variant="h6" fontWeight="regular" color="text">
+                            技能ID:&nbsp;&nbsp;&nbsp;
+                          </MDTypography>
+                        </Grid>
+                        <Grid item sm={8}>
+                          <MDTypography variant="h6" fontWeight="medium" color="text">
+                            {id}
+                          </MDTypography>
+                        </Grid>
                       </Grid>
-                      <Grid item sm={8}>
-                        <MDTypography variant="h6" fontWeight="medium" color="text">
-                          1
-                        </MDTypography>
-                      </Grid>
-                    </Grid>
-                  </MDBox>
+                    </MDBox>
+                  )}
                   {/*  */}
                   {/* Image */}
                   <MDBox mb={2}>
@@ -82,13 +128,25 @@ function SchoolForm() {
                   </MDBox>
                   {/*  */}
                   <MDBox mb={2}>
-                    <MDInput type="text" label="中文名称" fullWidth />
+                    <MDInput
+                      type="text"
+                      label="中文名称"
+                      fullWidth
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                    />
                   </MDBox>
                   <MDBox mb={2}>
-                    <MDInput type="text" label="英文名称" fullWidth />
+                    <MDInput
+                      type="text"
+                      label="英文名称"
+                      fullWidth
+                      value={enName}
+                      onChange={(e) => setEnName(e.target.value)}
+                    />
                   </MDBox>
                   <MDBox mt={4} mb={1}>
-                    <MDButton variant="gradient" color="info" fullWidth>
+                    <MDButton variant="gradient" color="info" fullWidth onClick={save}>
                       保存
                     </MDButton>
                   </MDBox>
@@ -98,6 +156,12 @@ function SchoolForm() {
           </Grid>
         </Grid>
       </MDBox>
+      <AlertMessage
+        open={alertOpen}
+        setOpen={setAlertOpen}
+        severity={alertSeverity}
+        message={alertMessage}
+      />
     </DashboardLayout>
   );
 }

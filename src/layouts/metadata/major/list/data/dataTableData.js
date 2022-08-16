@@ -26,7 +26,7 @@ import Grid from "@mui/material/Grid";
 import MDBox from "components/MDBox";
 import MDButton from "components/MDButton";
 
-const dataTableData = (deleteRow) => ({
+const dataTableData = (data, deleteRow) => ({
   columns: [
     {
       Header: "专业ID",
@@ -64,7 +64,7 @@ const dataTableData = (deleteRow) => ({
                   variant="outlined"
                   color="dark"
                   size="small"
-                  onClick={() => deleteRow(row.original.school_id)}
+                  onClick={() => deleteRow(row.original.major_id)}
                 >
                   删除
                 </MDButton>
@@ -76,108 +76,7 @@ const dataTableData = (deleteRow) => ({
     },
   ],
 
-  rows: [
-    {
-      major_id: 3,
-      name: "哲学",
-      en_name: "Philosophy",
-    },
-    {
-      major_id: 4,
-      name: "逻辑学",
-      en_name: "Logic",
-    },
-    {
-      major_id: 5,
-      name: "宗教学",
-      en_name: "Religious Studies",
-    },
-    {
-      major_id: 6,
-      name: "伦理学",
-      en_name: "Ethics",
-    },
-    {
-      major_id: 9,
-      name: "经济学",
-      en_name: "Economics",
-    },
-    {
-      major_id: 10,
-      name: "经济统计学",
-      en_name: "Economic Statistics",
-    },
-    {
-      major_id: 11,
-      name: "国民经济管理",
-      en_name: "National Economic Management",
-    },
-    {
-      major_id: 12,
-      name: "资源与环境经济学",
-      en_name: "Resource and Environmental Economics",
-    },
-    {
-      major_id: 13,
-      name: "商务经济学",
-      en_name: "Business Economics",
-    },
-    {
-      major_id: 14,
-      name: "能源经济",
-      en_name: "Energy Economy",
-    },
-    {
-      major_id: 15,
-      name: "劳动经济学",
-      en_name: "Labor Economics",
-    },
-    {
-      major_id: 16,
-      name: "经济工程",
-      en_name: "Economic Engineering",
-    },
-    {
-      major_id: 17,
-      name: "数字经济",
-      en_name: "Digital Economy",
-    },
-    {
-      major_id: 19,
-      name: "财政学",
-      en_name: "Public Finance",
-    },
-    {
-      major_id: 20,
-      name: "税收学",
-      en_name: "Taxation",
-    },
-    {
-      major_id: 22,
-      name: "金融学",
-      en_name: "Finance",
-    },
-    {
-      major_id: 23,
-      name: "金融工程",
-      en_name: "Financial Engineering",
-    },
-    {
-      major_id: 24,
-      name: "保险学",
-      en_name: "Insurance",
-    },
-    {
-      major_id: 25,
-      name: "投资学",
-      en_name: "Investment",
-    },
-    {
-      major_id: 26,
-      name: "金融数学",
-      en_name: "Financial Mathematics",
-    },
-  ],
+  rows: data,
 });
 
 export default dataTableData;
