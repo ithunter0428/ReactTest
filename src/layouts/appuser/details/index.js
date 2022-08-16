@@ -25,6 +25,7 @@ import Divider from "@mui/material/Divider";
 
 // Material Dashboard 2 PRO React components
 import MDBox from "components/MDBox";
+import MDBadge from "components/MDBadge";
 import MDButton from "components/MDButton";
 import MDTypography from "components/MDTypography";
 
@@ -284,17 +285,27 @@ function UserList() {
                   {/*  */}
                   <Divider />
                   {/*  */}
-                  <Grid container spacing={3} mb={3}>
+                  <Grid container spacing={0} mb={3}>
                     {/* UserId */}
                     <Grid item sm={1}>
                       <MDTypography variant="caption" fontWeight="regular" color="text">
                         技能:&nbsp;&nbsp;&nbsp;
                       </MDTypography>
                     </Grid>
-                    <Grid item sm={3}>
-                      <MDTypography variant="caption" fontWeight="medium">
-                        {data.skill_arr.map((skill) => skill.name).join(",")}
-                      </MDTypography>
+                    <Grid item sm={10}>
+                      <Grid container spacing={0}>
+                        <MDTypography variant="caption" fontWeight="medium">
+                          {data.skill_arr.map((skill) => (
+                            <MDBadge
+                              badgeContent={skill.name}
+                              sx={{ marginLeft: 1 }}
+                              variant="contained"
+                              size="xl"
+                              container
+                            />
+                          ))}
+                        </MDTypography>
+                      </Grid>
                     </Grid>
                   </Grid>
                   {/*  */}
@@ -305,9 +316,17 @@ function UserList() {
                         爱好:&nbsp;&nbsp;&nbsp;
                       </MDTypography>
                     </Grid>
-                    <Grid item sm={3}>
+                    <Grid item sm={10}>
                       <MDTypography variant="caption" fontWeight="medium">
-                        {data.hobby_arr.map((hobby) => hobby.name).join(",")}
+                        {data.hobby_arr.map((hobby) => (
+                          <MDBadge
+                            badgeContent={hobby.name}
+                            sx={{ marginLeft: 1 }}
+                            variant="contained"
+                            size="xl"
+                            container
+                          />
+                        ))}
                       </MDTypography>
                     </Grid>
                   </Grid>

@@ -11,13 +11,20 @@ authAxios.interceptors.request.use((config) => {
   return { ...config, headers };
 });
 
-authAxios.interceptors.response.use((response) => {
-  if (response.data.res_code === -995 || response.data.res_code === -999) {
-    localStorage.removeItem("token");
-    localStorage.removeItem("username");
-    window.location.href = "/authentication/sign-in";
+const logOut = () => {
+  localStorage.removeItem("token");
+  localStorage.removeItem("username");
+  window.location.href = "/authentication/sign-in";
+};
+authAxios.interceptors.response.use(
+  (response) => {
+    if (response.data.res_code === -995 || response.data.res_code === -999) logOut();
+    return response;
+  },
+  (error) => {
+    if (error.response.status === 401) logOut();
+    return Promise.reject(error);
   }
-  return response;
-});
+);
 
 export default authAxios;

@@ -17,6 +17,7 @@ import { useState, useEffect, useMemo } from "react";
 
 // react-router components
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import AuthProvider from "context/authContext";
 
 // @mui material components
 import { ThemeProvider } from "@mui/material/styles";
@@ -191,11 +192,13 @@ export default function App() {
         </>
       )}
       {layout === "vr" && <Configurator />}
-      <Routes>
-        {getRoutes(routes)}
-        {getRoutes(customRoutes)}
-        <Route path="*" element={<Navigate to="/authentication/sign-in" />} />
-      </Routes>
+      <AuthProvider>
+        <Routes>
+          {getRoutes(routes)}
+          {getRoutes(customRoutes)}
+          <Route path="*" element={<Navigate to="/authentication/sign-in" />} />
+        </Routes>
+      </AuthProvider>
     </ThemeProvider>
   );
 }
