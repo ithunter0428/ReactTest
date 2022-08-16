@@ -26,7 +26,7 @@ import Grid from "@mui/material/Grid";
 import MDBox from "components/MDBox";
 import MDButton from "components/MDButton";
 
-const dataTableData = (deleteRow) => ({
+const dataTableData = (data, deleteRow) => ({
   columns: [
     {
       Header: "学位ID",
@@ -64,7 +64,7 @@ const dataTableData = (deleteRow) => ({
                   variant="outlined"
                   color="dark"
                   size="small"
-                  onClick={() => deleteRow(row.original.school_id)}
+                  onClick={() => deleteRow(row.original.degree_id)}
                 >
                   删除
                 </MDButton>
@@ -76,38 +76,7 @@ const dataTableData = (deleteRow) => ({
     },
   ],
 
-  rows: [
-    {
-      degree_id: 1,
-      name: "学术学位博士",
-      en_name: "Academic PhD",
-    },
-    {
-      degree_id: 2,
-      name: "本科生",
-      en_name: "Undergraduates",
-    },
-    {
-      degree_id: 3,
-      name: "学术学位硕士",
-      en_name: "Academic Master",
-    },
-    {
-      degree_id: 4,
-      name: "专业学位博士",
-      en_name: "Professional PhD",
-    },
-    {
-      degree_id: 5,
-      name: "专业学位硕士",
-      en_name: "Professional Master",
-    },
-    {
-      degree_id: 6,
-      name: "专业博士",
-      en_name: "Professional Doctorate",
-    },
-  ],
+  rows: data,
 });
 
 export default dataTableData;

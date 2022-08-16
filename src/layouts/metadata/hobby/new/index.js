@@ -30,9 +30,53 @@ import MDBadge from "components/MDBadge";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 
-import profilePicture from "assets/images/team-3.jpg";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { addOrUpdate, getDetail } from "api/hobby";
+import AlertMessage from "components/AlertMessage";
 
 function SchoolForm() {
+  const location = useLocation();
+  const id = new URLSearchParams(location.search).get("id"); // if id is not set, it's add
+  const isAdd = id == null;
+  const [name, setName] = useState("");
+  const [enName, setEnName] = useState("");
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertSeverity, setAlertSeverity] = useState("success");
+  const [alertMessage, setAlertMessage] = useState("");
+  const [image, setImage] = useState("");
+
+  const save = async () => {
+    const result = await addOrUpdate(id || -1, name, enName, image);
+    if (result.res_code < 0) {
+      setAlertSeverity("error");
+      setAlertMessage(result.msg);
+    } else {
+      setAlertSeverity("success");
+      setAlertMessage(`Successfully ${isAdd ? "added" : "updated"}`);
+    }
+    setAlertOpen(true);
+  };
+
+  const loadDetailInfo = async () => {
+    const result = await getDetail(id);
+    if (result.res_code < 0) {
+      setAlertSeverity("error");
+      setAlertMessage(result.msg);
+      setAlertOpen(true);
+    } else {
+      setName(result.msg.name);
+      setEnName(result.msg.en_name);
+      setImage(result.msg.img_url);
+    }
+  };
+
+  useEffect(() => {
+    if (!isAdd) {
+      loadDetailInfo();
+    }
+  }, []);
+
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -43,52 +87,65 @@ function SchoolForm() {
               <MDBox pt={4} pb={3} px={3}>
                 <MDBox component="form" role="form">
                   <MDBox mb={2} textAlign="center">
-                    <MDBadge color="info">新建</MDBadge>
+                    <MDBadge color="info">{isAdd ? "创建" : "编辑"}</MDBadge>
                   </MDBox>
                   {/* School Id */}
-                  <MDBox mb={2}>
-                    <Grid container spaing={2} mt={2} mb={3}>
-                      <Grid item>
-                        <MDTypography variant="h6" fontWeight="regular" color="text">
-                          爱好id:&nbsp;&nbsp;&nbsp;
-                        </MDTypography>
+                  {!isAdd && (
+                    <MDBox mb={2}>
+                      <Grid container spaing={2} mt={2} mb={3}>
+                        <Grid item>
+                          <MDTypography variant="h6" fontWeight="regular" color="text">
+                            爱好id:&nbsp;&nbsp;&nbsp;
+                          </MDTypography>
+                        </Grid>
+                        <Grid item sm={8}>
+                          <MDTypography variant="h6" fontWeight="medium" color="text">
+                            {id}
+                          </MDTypography>
+                        </Grid>
                       </Grid>
-                      <Grid item sm={8}>
-                        <MDTypography variant="h6" fontWeight="medium" color="text">
-                          1
-                        </MDTypography>
-                      </Grid>
-                    </Grid>
-                  </MDBox>
+                    </MDBox>
+                  )}
                   {/*  */}
                   {/* Image */}
                   <MDBox mb={2}>
                     <Grid container spaing={2}>
-                      <Grid item>
-                        <MDTypography variant="h6" fontWeight="regular" color="text">
-                          图标:&nbsp;&nbsp;&nbsp;
-                        </MDTypography>
+                      <Grid item mr={1}>
+                        <MDButton variant="contained" component="label" color="success" fullWidth>
+                          图标
+                          <input
+                            type="file"
+                            hidden
+                            onChange={(e) => setImage(URL.createObjectURL(e.target.files[0]))}
+                          />
+                        </MDButton>
                       </Grid>
                       <Grid item sm={3}>
-                        <MDBox
-                          component="img"
-                          src={profilePicture}
-                          alt="Product Image"
-                          shadow="lg"
-                          width="100%"
-                        />
+                        <MDBox component="img" src={image} shadow="lg" width="100%" />
                       </Grid>
                     </Grid>
                   </MDBox>
                   {/*  */}
                   <MDBox mb={2}>
-                    <MDInput type="text" label="中文名称" fullWidth />
+                    <MDInput
+                      type="text"
+                      label="中文名称"
+                      fullWidth
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                    />
                   </MDBox>
                   <MDBox mb={2}>
-                    <MDInput type="text" label="英文名称" fullWidth />
+                    <MDInput
+                      type="text"
+                      label="英文名称"
+                      fullWidth
+                      value={enName}
+                      onChange={(e) => setEnName(e.target.value)}
+                    />
                   </MDBox>
                   <MDBox mt={4} mb={1}>
-                    <MDButton variant="gradient" color="info" fullWidth>
+                    <MDButton variant="gradient" color="info" fullWidth onClick={save}>
                       保存
                     </MDButton>
                   </MDBox>
@@ -98,6 +155,12 @@ function SchoolForm() {
           </Grid>
         </Grid>
       </MDBox>
+      <AlertMessage
+        open={alertOpen}
+        setOpen={setAlertOpen}
+        severity={alertSeverity}
+        message={alertMessage}
+      />
     </DashboardLayout>
   );
 }
